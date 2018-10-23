@@ -1,0 +1,12 @@
+#USERNAME, #PASSWORD {
+    padding-left: 30px;
+    border-radius: 0.25rem;
+}
+
+.input-group i {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    color: #C3C3C2;
+    z-index: 100;
+}

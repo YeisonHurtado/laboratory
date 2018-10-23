@@ -1,0 +1,126 @@
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar
+{
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: #6cb2eb;
+    border-radius: 10px;
+}
+
+div.row-menu {
+    margin-top: 10px;
+    flex-grow: 1;
+    display: -webkit-flex;
+    display: -ms-flex;
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    -o-display: flex;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+  }
+  
+  div.row-menu div.menu img {
+    width: 45%;
+  }
+  
+  div.row-menu span {
+    display: inline-block;
+    padding: 1rem;
+      font-size: .9rem;
+    font-family: "Arial", sans-serif;
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  div.row-menu div.menu {
+    padding: 10px;
+    width: 20%;
+    display: -webkit-flex;
+    display: -ms-flex;
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    -o-display: flex;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(222, 222, 222);
+    border-radius: 5px;
+    background: rgba(230, 230, 230, 0.38);
+  }
+  
+  div.menu:hover {
+    cursor: pointer;
+    opacity: .8;
+    -webkit-transition: all .6s ease;
+    -o-transition: all .6s ease;
+    transition: all .6s ease;
+    text-decoration: underline;
+  }
+
+.modal {
+    overflow-y:auto;
+}
+
+div#products_table, div#lab_table {
+    height: 300px;
+    overflow-y: auto;
+}
+
+table.table-hover{
+    cursor: pointer;
+}
+
+.input-group input {
+    padding-left: 30px;
+    border-radius: 0.25rem!important;
+}
+
+.input-group i {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    color: #C3C3C2;
+    z-index: 100;
+}
+
+.input-group-mini i {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    color: #C3C3C2;
+    z-index: 100;
+}
+
+table#product_adds, table#table_lab_product, table#labs_add {
+    table-layout: fixed;
+}
+
+table#product_adds th,  table#product_adds td, table#labs_add th,  table#labs_add td,
+table#table_lab_product>thead th, table#table_lab_product>tbody tr td{
+    width: 150px;
+}
+
+table#product_adds>thead th:nth-child(2), table#product_adds>tbody tr td:nth-child(2),
+table#labs_add>thead th:nth-child(2), table#labs_add>tbody tr td:nth-child(2) {
+    width: 250px;
+}
+
+div.error-add { color: #FF9900; display: none; }
+
+.message_product { padding: 15px; margin: 10px; display: none; }
+.message_product.success{  background: #9cdcb7; color: #1c7430; border: 3px solid #1e7e34; border-radius: 4px; }
+.message_product.error {  background: rgba(181, 0, 18, 0.44); color: rgba(183, 17, 34, 0.95); border: 3px solid #7e0109; border-radius: 4px; }
