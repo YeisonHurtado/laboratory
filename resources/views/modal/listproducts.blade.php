@@ -36,10 +36,10 @@
                             Producto eliminado
                         </div>
                         <div class="form-group">
-                            <button type="button" id="product_edit" class="btn btn-block btn-primary" data-cod_prod="" data-dismiss="modal" disabled><i class="fa fa-edit"></i>Editar</button>
+                            <button type="button" id="product_edit" class="btn btn-sm btn-block btn-primary" data-cod_prod="" data-dismiss="modal" disabled><i class="fa fa-edit"></i>Editar</button>
                         </div>
                         <div class="form-group">
-                            <button type="button" id="product_delete" data-cod_prod="" class="btn btn-danger" data-toggle="modal" data-target="#modalDeleteProduct" disabled><i class="fas fa-trash-alt"></i> Eliminar</button>
+                            <button type="button" id="product_delete" data-cod_prod="" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalDeleteProduct" disabled><i class="fas fa-trash-alt"></i> Eliminar</button>
                         </div>
                     </div>
                 </div>

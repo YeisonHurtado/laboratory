@@ -80,7 +80,7 @@
                         <div class="error-add error-add-cost">¡Ingresa el costo del producto!</div>
                     </div>
                 </div>
-                <div class="table-responsive">
+                <div id="products_laboratory" class="table-responsive">
                     <table id="table_lab_product" class="table table-striped">
                         <thead>
                         <tr>

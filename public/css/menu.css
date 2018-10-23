@@ -75,39 +75,45 @@ div.row-menu {
     overflow-y:auto;
 }
 
+
+table.table-hover{
+cursor: pointer;
+}
+
+.input-group input, .input-group select  {
+padding-left: 30px;
+border-radius: 0.25rem!important;
+}
+
+.input-group i {
+position: absolute;
+top: 12px;
+left: 10px;
+color: #C3C3C2;
+z-index: 100;
+}
+
+.input-group-mini i {
+position: absolute;
+top: 8px;
+left: 10px;
+color: #16066B80;
+z-index: 100;
+}
+
 div#products_table, div#lab_table {
     height: 300px;
     overflow-y: auto;
 }
 
-table.table-hover{
-    cursor: pointer;
-}
-
-.input-group input, .input-group select  {
-    padding-left: 30px;
-    border-radius: 0.25rem!important;
-}
-
-.input-group i {
-    position: absolute;
-    top: 12px;
-    left: 10px;
-    color: #C3C3C2;
-    z-index: 100;
-}
-
-.input-group-mini i {
-    position: absolute;
-    top: 8px;
-    left: 10px;
-    color: #16066B80;
-    z-index: 100;
+div#products_laboratory{
+    max-height: 250px;
 }
 
 table#product_adds, table#table_lab_product, table#labs_add {
     table-layout: fixed;
 }
+
 
 table#product_adds th,  table#product_adds td, table#labs_add th,  table#labs_add td,
 table#table_lab_product>thead th, table#table_lab_product>tbody tr td{
