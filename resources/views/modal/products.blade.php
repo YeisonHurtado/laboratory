@@ -39,11 +39,11 @@
             <div class="form-group">
               <div class="message_product">
               </div>
-              <button type="button" name="new_product" id="new_product" class="btn btn-success"><i class="fas fa-user-plus"></i> Nuevo</button>
-              <button type="submit" name="save_product" id="save_product" class="btn btn-primary" disabled><i class="fas fa-database"></i> Guardar</button>
-              <button type="button" name="" id="product_search" class="btn btn-primary" data-toggle="modal" data-target="#miModalListProduct"><i class="fas fa-search"></i> Buscar</button>
-              <button type="submit" id="update_product" class="btn btn-success" disabled><i class="fas fa-redo-alt"></i> Actualizar</button>
-              <button type="button" name="exit_modalProd" id="exit_modalProd" class="btn btn-danger" data-dismiss="modal" onclick="clearForm()"><i class="fas fa-times"></i> Cerrar</button>
+              <button type="button" name="new_product" id="new_product" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i> Nuevo</button>
+              <button type="submit" name="save_product" id="save_product" class="btn btn-primary btn-sm" disabled><i class="fas fa-database"></i> Guardar</button>
+              <button type="button" name="" id="product_search" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#miModalListProduct"><i class="fas fa-search"></i> Buscar</button>
+              <button type="submit" id="update_product" class="btn btn-success btn-sm" disabled><i class="fas fa-redo-alt"></i> Actualizar</button>
+              <button type="button" name="exit_modalProd" id="exit_modalProd" class="btn btn-danger btn-sm" data-dismiss="modal" onclick="clearForm()"><i class="fas fa-times"></i> Cerrar</button>
             </div>
           </div>
         </form>

@@ -84,7 +84,7 @@ table.table-hover{
     cursor: pointer;
 }
 
-.input-group input {
+.input-group input, .input-group select  {
     padding-left: 30px;
     border-radius: 0.25rem!important;
 }
@@ -101,7 +101,7 @@ table.table-hover{
     position: absolute;
     top: 8px;
     left: 10px;
-    color: #C3C3C2;
+    color: #16066B80;
     z-index: 100;
 }
 
@@ -115,6 +115,7 @@ table#table_lab_product>thead th, table#table_lab_product>tbody tr td{
 }
 
 table#product_adds>thead th:nth-child(2), table#product_adds>tbody tr td:nth-child(2),
+table#table_lab_product>thead th:nth-child(2), table#table_lab_product>tbody tr td:nth-child(2),
 table#labs_add>thead th:nth-child(2), table#labs_add>tbody tr td:nth-child(2) {
     width: 250px;
 }

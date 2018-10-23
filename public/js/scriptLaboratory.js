@@ -160,7 +160,12 @@ $(document).ready(function (e) {
                     $('table#table_lab_product tbody').append('<tr>' +
                         '<td> <input type="text" name="codigo_prod['+i+']" class="codigo_prod form-control form-control-sm" readonly value="' + item.PRODUCT_CODE + '"> </td>' +
                         '<td>' + item.PRODUCT_NAME + '</td>' +
-                        '<td> <input type="number" name="costo_prod['+i+']" id="cost_product" class="form-control form-control-sm" readonly value="' + item.pivot.COST + '"> </td>' +
+                        '<td> ' +
+                        '<div class="input-group input-group-mini">' +
+                        '<input type="number" name="costo_prod['+i+']" id="cost_product" class="form-control form-control-sm" readonly value="' + item.pivot.COST + '"> ' +
+                        '<i class="fa fa-dollar-sign"></i>' +
+                        '</div>' +
+                        '</td>' +
                         '<td><button type="button" class="btn btn-danger btn-sm btn-eliminar-item" data-removeItem="' + item.PRODUCT_CODE + '"><i class="fas fa-trash-alt"></i> Eliminar</button></td>' +
                         '</tr>');
                     $('#select_product_lab option[value="'+ item.PRODUCT_CODE + '"]').css('display','none');
@@ -324,7 +329,12 @@ $(document).ready(function (e) {
                 $('table#table_lab_product tbody').append('<tr>' +
                     '<td> <input type="text" name="codigo_prod[]" class="codigo_prod form-control form-control-sm" readonly value="' + data.PRODUCT_CODE + '"> </td>' +
                     '<td>' + data.PRODUCT_NAME + '</td>' +
-                    '<td> <input type="number" name="costo_prod[]" id="cost_product" class="form-control form-control-sm" readonly value="' + cost + '"> </td>' +
+                    '<td> ' +
+                    '<div class="input-group input-group-mini">' +
+                    '<input type="number" name="costo_prod[]" id="cost_product" class="form-control form-control-sm" readonly value="' + cost + '">' +
+                    '<i class="fa fa-dollar-sign"></i>'+
+                    '</div>' +
+                    '</td>' +
                     '<td><button type="button" class="btn btn-danger btn-sm btn-eliminar-item" data-removeItem="' + data.PRODUCT_CODE + '"><i class="fas fa-trash-alt"></i> Eliminar</button></td>' +
                     '</tr>');
             }

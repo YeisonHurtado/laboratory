@@ -33,10 +33,10 @@
                             Laboratorio eliminado
                         </div>
                         <div class="form-group">
-                            <button type="button" id="lab_edit" class="btn btn-block btn-primary" data-id_lab="" data-dismiss="modal" disabled><i class="fa fa-edit"></i>Editar</button>
+                            <button type="button" id="lab_edit" class="btn btn-block btn-primary btn-sm" data-id_lab="" data-dismiss="modal" disabled><i class="fa fa-edit"></i> Editar</button>
                         </div>
                         <div class="form-group">
-                            <button type="button" id="lab_delete" data-id_lab="" class="btn btn-danger" data-toggle="modal" data-target="#modalDeleteLab" disabled><i class="fas fa-trash-alt"></i> Eliminar</button>
+                            <button type="button" id="lab_delete" data-id_lab="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDeleteLab" disabled><i class="fas fa-trash-alt"></i> Eliminar</button>
                         </div>
                     </div>
                 </div>

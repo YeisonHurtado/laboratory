@@ -17,36 +17,51 @@
               <div class="row">
                 <div class="form-group col-md-6 col-xs-6">
                   <label for="code_student">Código</label>
-                  <input type="text" name="code_student" id="code_student" class="form-control form-control-sm col-md-12">
+                  <div class="input-group input-group-mini">
+                    <input type="text" name="code_student" id="code_student" class="form-control form-control-sm col-md-12">
+                    <i class="far fa-id-card"></i>
+                  </div>
                 </div>
                 <div class="form-group col-md-6 col-xs-6">
                   <label for="name_student">Nombre</label>
-                  <input type="text" name="name_student" id="name_student" class="form-control form-control-sm col-md-12">
+                  <div class="input-group input-group-mini">
+                    <input type="text" name="name_student" id="name_student" class="form-control form-control-sm col-md-12">
+                    <i class="fa fa-user-graduate"></i>
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-6 col-xs-6">
                   <label for="email">Correo electrónico</label>
-                  <input type="email" name="email" id="email" class="form-control form-control-sm">
+                  <div class="input-group input-group-mini">
+                    <input type="email" name="email" id="email" class="form-control form-control-sm">
+                    <i class="fa fa-at"></i>
+                  </div>
                 </div>
                 <div class="form-group col-md-6 col-xs-6">
                   <label for="telefono">Teléfono</label>
-                  <input type="text" name="telefono" id="telefono" class="form-control form-control-sm">
+                  <div class="input-group input-group-mini">
+                    <input type="text" name="telefono" id="telefono" class="form-control form-control-sm">
+                    <i class="fas fa-mobile-alt"></i>
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-6 col-xs-6">
                   <label for="semestre">Semestre</label>
-                  <select name="semestre" id="semestre" class="form-control form-control-sm">
-                    <option value="I">I</option>
-                    <option value="II">II</option>
-                    <option value="III">III</option>
-                    <option value="IV">IV</option>
-                    <option value="V">V</option>
-                    <option value="VI">VI</option>
-                    <option value="VII">VII</option>
-                    <option value="VIII"><VIII></VIII></option>
-                  </select>
+                  <div class="input-group input-group-mini">
+                    <select name="semestre" id="semestre" class="form-control form-control-sm">
+                      <option value="I">I</option>
+                      <option value="II">II</option>
+                      <option value="III">III</option>
+                      <option value="IV">IV</option>
+                      <option value="V">V</option>
+                      <option value="VI">VI</option>
+                      <option value="VII">VII</option>
+                      <option value="VIII"><VIII></VIII></option>
+                    </select>
+                    <i class="far fa-calendar-alt"></i>
+                  </div>
                 </div>
                 <div class="form-group col-md-6 col-xs-6"></div>
               </div>
@@ -61,12 +76,18 @@
             <div class="card-body">
               <div class="row">
                 <div class="form-group col-md-6 col-xs-6">
-                  <label for="nhc">Núm. H.C.</label>
-                  <input type="text" name="nhc" id="nhc" class="form-control form-control-sm col-md-12" value="">
+                  <label for="nhc">Número de historia clínica</label>
+                  <div class="input-group input-group-mini">
+                    <i class="far fa-file-alt"></i>
+                    <input type="text" name="nhc" id="nhc" class="form-control form-control-sm col-md-12" value="">
+                  </div>
                 </div>
                 <div class="form-group col-md-6 col-xs-6">
                   <label for="name_patient">Nombre completo</label>
-                  <input type="text" name="name_patient" id="name_patient" class="form-control form-control-sm col-md-12">
+                  <div class="input-group input-group-mini">
+                    <input type="text" name="name_patient" id="name_patient" class="form-control form-control-sm col-md-12">
+                    <i class="far fa-user"></i>
+                  </div>
                 </div>
               </div>
             </div>
