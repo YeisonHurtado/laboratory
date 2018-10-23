@@ -8,32 +8,50 @@
         <div class="row col-md-12">
             <div class="form-group col-md-4">
                 <label for="name_lab">Nombre comercial</label>
-                <input type="text" name="name_lab" id="name_lab" class="form-control form-control-sm col-md-12">
+                <div class="input-group input-group-mini">
+                    <input type="text" name="name_lab" id="name_lab" class="form-control form-control-sm col-md-12">
+                    <i class="fas fa-flask"></i>
+                </div>
             </div>
             <div class="form-group col-md-4">
                 <label for="rep_legal">Representante legal</label>
-                <input type="text" name="rep_legal" id="rep_legal" class="form-control form-control-sm col-md-12">
+                <div class="input-group input-group-mini">
+                    <input type="text" name="rep_legal" id="rep_legal" class="form-control form-control-sm col-md-12">
+                    <i class="fas fa-user-tie"></i>
+                </div>
             </div>
             <div class="form-group col-md-4">
                 <label for="dire_lab">Dirección laboratorio</label>
-                <input type="text" name="dire_lab" id="dire_lab" class="form-control form-control-sm col-md-12">
+                <div class="input-group input-group-mini">
+                    <input type="text" name="dire_lab" id="dire_lab" class="form-control form-control-sm col-md-12">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
                 <span id="error_direcLab" class="text-danger d-none"></span>
             </div>
         </div>
         <div class="row col-md-12">
             <div class="form-group col-md-4">
                 <label for="tel_lab">Teléfono</label>
-                <input type="text" name="tel_lab" id="tel_lab" class="form-control form-control-sm col-md-12">
+                <div class="input-group input-group-mini">
+                    <input type="text" name="tel_lab" id="tel_lab" class="form-control form-control-sm col-md-12">
+                    <i class="fas fa-phone"></i>
+                </div>
                 <span id="error_telLab" class="text-danger d-none"></span>
             </div>
             <div class="form-group col-md-4">
                 <label for="cel_lab">Celular</label>
-                <input type="text" name="cel_lab" id="cel_lab" class="form-control form-control-sm col-md-12">
+                <div class="input-group input-group-mini">
+                    <input type="text" name="cel_lab" id="cel_lab" class="form-control form-control-sm col-md-12">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
                 <span id="error_celLab" class="text-danger d-none"></span>
             </div>
             <div class="form-group col-md-4">
                 <label for="email_lab">Email</label>
-                <input type="email" name="email_lab" id="email_lab" class="form-control form-control-sm">
+                <div class="input-group input-group-mini">
+                    <input type="email" name="email_lab" id="email_lab" class="form-control form-control-sm">
+                    <i class="fa fa-at"></i>
+                </div>
                 <span id="error_email" class="text-danger d-none"></span>
             </div>
         </div>
@@ -44,13 +62,13 @@
                 </div>
             </div>
             <div class="card-body">
-                <div id="lista_productos" class="col-md-12 my-6 form-inline">
-                    <div class="form-group form-inline col-md-5 my-1">
+                <div id="lista_productos" class="col-md-12 my-6 form-inline p-0">
+                    <div class="form-group form-inline col-md-5 my-1 p-0">
                         <label for="select_product_lab" class="mr-2">Producto</label>
                         <select name="select_product_lab" id="select_product_lab" class="form-control form-control-sm col-md-8 col-lg-8 col-sm-8 col-xs-8 mr-2">
                         </select>
                     </div>
-                    <div class="form-group form-inline col-md-6 my-1">
+                    <div class="form-group form-inline col-md-6 my-1 p-0">
                         <div class="input-group input-group-mini col-md-8 p-0 my-2">
                             <input type="number" id="costo" class="form-control form-control-sm col-md-12 mr-2" min="1" placeholder="Costo:" value="">
                             <i class="fa fa-dollar-sign"></i>
