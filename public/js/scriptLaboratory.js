@@ -71,6 +71,7 @@ $(document).ready(function (e) {
         updateLaboratory = false;
         enabledInputsLab();
         disabledButtonsToNewLab();
+        $('input#name_lab').focus();
     });
 
     $(document).on('click', '.item_lab',function () {
@@ -259,6 +260,12 @@ $(document).ready(function (e) {
                         $('#error_email').removeClass('d-none');
                         $('#error_email').text(data.errors.email_lab[0]);
                         $('#error_email').fadeIn(500).delay(4000).fadeOut(500);
+                    }
+
+                    if (data.errors.name_lab) {
+                        $('#error_name').removeClass('d-none');
+                        $('#error_name').text(data.errors.name_lab[0]);
+                        $('#error_name').fadeIn(500).delay(4000).fadeOut(500);
                     }
                 }
                 

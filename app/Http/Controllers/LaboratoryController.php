@@ -41,6 +41,7 @@ class LaboratoryController extends Controller
     {
         $laboratory = new Laboratory();
         $validate = Validator::make($request->all(),[
+            'name_lab'=>'required',
             'dire_lab'=>'required',
             'email_lab'=>'required|email|unique:LABORATORIES,EMAIL'
         ]);

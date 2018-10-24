@@ -106,6 +106,7 @@ return [
     'attributes' => [
         'USERNAME' => 'nombre de usuario',
         'PASSWORD' => 'contraseña',
+        'name_lab'=>'Este campo es ',
         'dire_lab' => 'Este campo es ',
         'email_lab' => 'Correo electrónico',
         'tel_lab' => 'Este teléfono ',

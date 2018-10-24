@@ -12,6 +12,7 @@
                     <input type="text" name="name_lab" id="name_lab" class="form-control form-control-sm col-md-12">
                     <i class="fas fa-flask"></i>
                 </div>
+                <span id="error_name" class="text-danger d-none"></span>
             </div>
             <div class="form-group col-md-4">
                 <label for="rep_legal">Representante legal</label>
