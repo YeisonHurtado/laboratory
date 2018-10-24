@@ -58,7 +58,7 @@
                       <option value="V">V</option>
                       <option value="VI">VI</option>
                       <option value="VII">VII</option>
-                      <option value="VIII"><VIII></VIII></option>
+                      <option value="VIII">VIII</option>
                     </select>
                     <i class="far fa-calendar-alt"></i>
                   </div>
