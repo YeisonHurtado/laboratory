@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/order.css') }}">
     <link rel="stylesheet" href="{{ asset('fonts/css/all.min.css') }}">
     <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
     <title>@yield('title_page')</title>

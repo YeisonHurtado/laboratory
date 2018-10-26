@@ -126,6 +126,19 @@
                         </div>
                         <div id="error_vaciado" class="text-warning col-md-12 col-sm-12 p-0 d-none"></div>
                     </div>
+                    <div id="repeticion" class="row col-md-6">
+                        <span class="col-md-4 col-sm-4 p-0">¿Repetición?</span>
+                        <div class="form-check col-md-3">
+                            <label for="repeticion_si">
+                                <input type="radio" name="repeticion" id="repeticion_si" class="form-check-input" value="1"> Sí
+                            </label>
+                        </div>
+                        <div class="form-check col-md-3">
+                            <label for="repeticion_no">
+                                <input type="radio" name="repeticion" id="repeticion_no" class="form-check-input" value="0" checked> No
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="products_add table-responsive">
