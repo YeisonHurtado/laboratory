@@ -106,7 +106,7 @@ div#products_table, div#lab_table {
     overflow-y: auto;
 }
 
-div#products_laboratory{
+div.products_add{
     max-height: 250px;
 }
 

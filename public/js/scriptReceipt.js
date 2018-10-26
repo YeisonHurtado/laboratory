@@ -53,7 +53,7 @@ function validateAddProduct() {
         ok = false;
     }
     
-    if ($('#cantidad').val() == "") {
+    if ($('#cantidad').val() == "" || $('#cantidad').val() == 0) {
         $('div.error-add-quantity').fadeIn(500).delay(2000).fadeOut(500);
         ok = false;
     }

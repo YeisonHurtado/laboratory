@@ -69,7 +69,7 @@
                         <select name="select_product_lab" id="select_product_lab" class="form-control form-control-sm col-md-8 col-lg-8 col-sm-8 col-xs-8 mr-2">
                         </select>
                     </div>
-                    <div class="form-group form-inline col-md-6 my-1 p-0">
+                    <div class="form-group form-inline col-md-6 mt-1 p-0">
                         <div class="input-group input-group-mini col-md-8 p-0 my-2">
                             <input type="number" id="costo" class="form-control form-control-sm col-md-12 mr-2" min="1" placeholder="Costo:" value="">
                             <i class="fa fa-dollar-sign"></i>
@@ -81,7 +81,7 @@
                         <div class="error-add error-add-cost">¡Ingresa el costo del producto!</div>
                     </div>
                 </div>
-                <div id="products_laboratory" class="table-responsive">
+                <div id="products_laboratory" class="products_add table-responsive mt-2">
                     <table id="table_lab_product" class="table table-striped">
                         <thead>
                         <tr>
