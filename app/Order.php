@@ -16,6 +16,11 @@ class Order extends Model
 
     public function student()
     {
-        return $this->belongsTo("");
+        return $this->belongsTo('App\Student', 'EST_COD', 'EST_COD');
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo('App\Patient', 'HCLINICA', 'NUM_PACIENTE');
     }
 }

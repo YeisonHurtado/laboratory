@@ -15,6 +15,11 @@ class Patient extends Model
 
     public function student()
     {
-        
+        return $this->belongsTo('App\Student', 'EST_COD', 'EST_COD');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order', 'HCLINICA', 'NUM_PACIENTE');
     }
 }

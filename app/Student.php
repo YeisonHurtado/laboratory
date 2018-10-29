@@ -15,4 +15,14 @@ class Student extends Model
         "TEL_CEL",
         "SEMESTRE"
     ];
+
+    public function patient()
+    {
+        return $this->hasMany('App\Patient', 'EST_COD', 'EST_COD');
+    }
+    
+    public function orders()
+    {
+        return $this->hasMany('App\Order', 'EST_COD', 'EST_COD');
+    }
 }
