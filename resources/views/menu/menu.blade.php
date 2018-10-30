@@ -37,4 +37,6 @@
 @include("modal.employees")
 @include("deletemodals.productDelete")
 @include("deletemodals.laboratoryDelete")
+@include("patient.patients_student")
+@include("patient.allpatients")
 @endsection

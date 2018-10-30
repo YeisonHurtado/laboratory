@@ -76,6 +76,10 @@ div.row-menu {
 }
 
 
+#code_student{
+    text-transform: uppercase;
+}
+
 table.table-hover{
 cursor: pointer;
 }

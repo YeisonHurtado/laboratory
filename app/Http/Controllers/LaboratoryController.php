@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Laboratory;
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+    use Illuminate\Support\Facades\Validator;
 
 class LaboratoryController extends Controller
 {

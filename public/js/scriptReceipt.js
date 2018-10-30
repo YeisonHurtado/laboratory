@@ -1,5 +1,55 @@
 $(document).ready(function (event) {
-    receiptProductList('recibo/producto');
+    orderProductList('orden/producto');
+    disabledAllInputs();
+    disabledButtons();
+
+    $('#new_reciept').on('click', function (e) {
+        e.preventDefault();
+        enabledAllInputs();
+        $('#new_reciept').attr('disabled', true);
+        $('#save_receipt, #print_reciept').attr('disabled', false);
+        $('#code_student').focus();
+    });
+
+    $('#code_student').on('keyup', function (e) {
+        var key = (e.keyCode ? e.keyCode : e.which);
+        if (key == 13){
+            var code = $(this).val();
+            consultStudent(code);
+            $('#show_patient').attr('disabled', true);
+            $('#search_other').attr('data-code_std', code);
+        }
+    });
+
+    $('#nhc').on('keyup', function (e) {
+        var key = (e.keyCode ? e.keyCode : e.which);
+        if (key == 13){
+            var numhc = $(this).val();
+            showOnePatient(numhc);
+        }
+    });
+    
+    $('#show_patient').on('click', function (e) {
+        var num = $(this).attr('data-numHC');
+        showOnePatient(num);
+    });
+
+    $('#search_other').on('click', function (e) {
+        var code = $(this).attr('data-code_std');
+        $('#student_code').val(code);
+        $('#change_student').attr({
+            'disabled':true,
+            'data-numhc':''
+        });
+        showAllPatients(code);
+    });
+
+    $('#change_student').on('click', function (e) {
+        e.preventDefault();
+        var code = $('#num_hc').val();
+        var token = $('#token').val();
+        updatePatientStudent(code, token);
+    });
 
     $('#btnAdd').on('click', function (e) {
         var code = $('#select_product').val();
@@ -18,7 +68,129 @@ $(document).ready(function (event) {
         $('#select_product option[value="'+ code + '"]').css('display','block');
         $(this).parents('tr').remove();
     });
+    
+    $(document).on('click', '.patient_item', function (e) {
+        $('tr.patient_item').removeClass('bg-info text-light');
+        $(this).toggleClass('bg-info text-light');
+        $('#show_patient').attr('disabled', false);
+        $('#show_patient').attr('data-numHC',$(':first-child',this).text())
+    });
+
+    $(document).on('click', '.patients_items', function (e) {
+        $('#num_hc').val($(':first-child',this).text());
+        $('tr.patients_items').removeClass('bg-info text-light');
+        $(this).toggleClass('bg-info text-light');
+        $('#change_student').attr('disabled', false);
+        $('#change_student').attr('data-numHC',$(':first-child',this).text())
+    });
 });
+
+function consultStudent(code) {
+    var route = "estudiante/"+code;
+    $.ajax({
+        url: route,
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+            if ($.isEmptyObject(data)){
+                $('#name_student').focus();
+                $('#name_student').val(data.NOMBRE_EST);
+                $('#email').val(data.CORREO);
+                $('#telefono').val(data.TEL_CEL);
+                $('#semestre option[value="I"]').attr('selected', true);
+            } else {
+                $('#name_student').val(data.NOMBRE_EST);
+                $('#email').val(data.CORREO);
+                $('#telefono').val(data.TEL_CEL);
+                $('#semestre').val(data.SEMESTRE);
+                patients(code);
+                $('body').addClass('modal-open');
+                $('#patientStudent').modal('show');
+                //$('#patientStudent').attr('aria-hidden', false);
+                //$('#patientStudent').css('display','block');
+                //$('#semestre option[value="'+item.SEMESTRE+'"]').attr('selected', true);
+            }
+        }
+    });
+}
+
+function patients(code) {
+    var route = "estudiante/"+code+"/pacientes";
+    $.ajax({
+        url: route,
+        type: 'get',
+        success: function (data) {
+            $('#student_patients tbody').empty().html(data);
+        }
+    });
+}
+
+function showOnePatient(numhc) {
+    var route = "paciente/"+numhc+"/show";
+    $.ajax({
+        url: route,
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+            $('#nhc').val(data.NUM_PACIENTE);
+            $('#name_patient').val(data.NOMBRE);
+        }
+    });
+}
+
+function showAllPatients(code) {
+    var route = "paciente/"+code+"/all";
+    $.ajax({
+        url: route,
+        type: 'get',
+        success: function (data) {
+            $('#all_patients tbody').html(data);
+        }
+    });
+}
+
+function updatePatientStudent(code, token) {
+    var route = "paciente/"+code;
+    $.ajax({
+        url: route,
+        type: 'PATCH',
+        headers: {'X-CSRF-TOKEN':token},
+        dataType: 'json',
+        data: $('form#patients').serialize(),
+        success: function (data) {
+            if (data.update == "true"){
+                $('#patientStudent').modal('toggle');
+                showOnePatient($('#num_hc').val());
+            }
+        }
+    });
+}
+
+function orderProductList(route) {
+    $.ajax({
+        url: route,
+        type: 'get',
+        success: function(data){
+            $('#lista_productos #select_product, #select_product_lab').empty().html(data);
+        }
+    });
+}
+
+function validateAddProduct() {
+    var ok = true;
+
+    if ($('#select_product').val() == ""){
+        $('div.error-add-product').fadeIn(500).delay(2000).fadeOut(500);
+        ok = false;
+    }
+
+    if ($('#cantidad').val() == "" || $('#cantidad').val() == 0) {
+        $('div.error-add-quantity').fadeIn(500).delay(2000).fadeOut(500);
+        ok = false;
+    }
+
+    return ok;
+}
 
 function addRowProduct(code, quantity){
     var route = "/productos/"+code+"/edit";
@@ -45,34 +217,23 @@ function addRowProduct(code, quantity){
     });
 }
 
-function validateAddProduct() {
-    var ok = true;
-
-    if ($('#select_product').val() == ""){
-        $('div.error-add-product').fadeIn(500).delay(2000).fadeOut(500);
-        ok = false;
-    }
-    
-    if ($('#cantidad').val() == "" || $('#cantidad').val() == 0) {
-        $('div.error-add-quantity').fadeIn(500).delay(2000).fadeOut(500);
-        ok = false;
-    }
-
-    return ok;
+function disabledAllInputs() {
+    $('#order_form input, #order_form select').attr('disabled', true);
 }
 
-function receiptProductList(route) {
-    $.ajax({
-        url: route,
-        type: 'get',
-        success: function(data){
-            $('#lista_productos #select_product, #select_product_lab').empty().html(data);
-        }
-    });
+function disabledButtons() {
+    $('#new_reciept').attr('disabled', false);
+    $('#save_receipt, #print_reciept, #update_receipt, #update_receipt').attr({'disabled':true});
 }
 
-function clearReceiptForm(){
-    $('#receipt_form')[0].reset();
-    receiptProductList('recibo/producto');
+function enabledAllInputs() {
+    $('#order_form input, #order_form select').attr('disabled', false);
+}
+
+function clearOrderForm(){
+    $('#order_form')[0].reset();
+    disabledAllInputs();
+    disabledButtons();
+    orderProductList('orden/producto');
     $('table#product_adds tbody').empty();
 }

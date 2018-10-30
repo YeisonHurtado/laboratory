@@ -2,27 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
+use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class StudentController extends Controller
+class OrderController extends Controller
 {
+
+    public function products()
+    {
+        $products = Product::select('PRODUCT_CODE','PRODUCT_NAME','PRODUCT_VAL')->orderBy('PRODUCT_CODE','desc')->get();
+        return view('receipt.productList', compact('products'));
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function patients($code)
-    {
-        $patients = Student::find($code)->patient;
-
-        return view('patient.tables.patientStudent', compact('patients'));
-    }
-    
     public function index()
     {
-
+        //
     }
 
     /**
@@ -43,31 +44,12 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $student = new Student();
+        $order = new Order();
         $validate = Validator::make($request->all(),[
             'code_student'=>'required|min:9|max:9',
-            'name_student'=>'required|max:50',
-            'email'=>'required|email|max:50',
-            'telefono'=>'required|max:11',
-            'semestre'=>'required'
+            'name_student'=>'required|max:50'
         ]);
 
-        if ($validate->fails()){
-            return response()->json(['errors'=>$validate->errors()]);
-        }
-
-        $student->EST_CODE = $request->get('code_student');
-        $student->NOMBRE_EST = $request->get('name_student');
-        $student->CORREO = $request->get('email');
-        $student->TEL_CEL = $request->get('telefono');
-        $student->SEMESTRE = $request->get('semestre');
-        $result = $student->save();
-
-        if ($result){
-            return response()->json(['save'=>'true']);
-        } else {
-            return response()->json(['save'=>'false']);
-        }
     }
 
     /**
@@ -76,11 +58,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($code)
+    public function show($id)
     {
-        $student = Student::find($code);
-
-        return response()->json($student);
+        //
     }
 
     /**

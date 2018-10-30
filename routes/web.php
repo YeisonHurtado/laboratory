@@ -16,14 +16,21 @@ Route::get('/', function () {
 });
 
 Route::post('login', 'Auth\LoginController@login')->name('login');
-
 Route::get('menu', 'MenuController@index')->name('menu');
+
+Route::get('estudiante/{codigo}','StudentController@show');
+Route::get('estudiante/{codigo}/pacientes/', 'StudentController@patients');
+
+Route::resource('paciente','PatientController');
+Route::get('paciente/{num}/show','PatientController@show');
+Route::get('paciente/{num}/all','PatientController@index');
+
 Route::resource('/productos','ProductController');
 Route::post('addproductos', 'ProductController@store');
 Route::get('lista/productos/{code?}','ProductController@listproducts');
 Route::get('name/productos/{nameproduct?}','ProductController@searchNameProduct');
 
-Route::get('recibo/producto','ReceiptController@products');
+Route::get('orden/producto','OrderController@products');
 
 Route::resource('/laboratorios','LaboratoryController');
 Route::post('addlaboratorio','LaboratoryController@store');

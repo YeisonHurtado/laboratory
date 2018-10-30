@@ -415,7 +415,7 @@ $(document).ready(function (e) {
         disabledInputsLab();
         clearInterval(idInterval);
         disabledButtonToCloseLab();
-        receiptProductList('recibo/producto');
+        orderProductList('orden/producto');
         $('table#table_lab_product tbody').empty();
     }
 

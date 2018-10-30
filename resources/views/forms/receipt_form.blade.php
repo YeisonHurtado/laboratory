@@ -1,72 +1,87 @@
-<form action="" id="receipt_form" class="form p-1">
+<form action="" id="order_form" class="form p-1">
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
     <input type="hidden" name="fechaIngreso" id="fechaIngreso" value="">
     <div class="modal-header">
       <h4 class="modal-title">LABORATORIO PINTO - RECIBO DE CONSIGNACIÓN</h4>
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <button type="button" class="close" data-dismiss="modal" onclick="clearOrderForm()">&times;</button>
     </div>
     <div class="row">
         <div class="modal-body col-md-12">
             <div class="card card-default my-1">
-            <div class="card-header">
-              <div class="card-title">
-                Información del estudiante
-              </div>
+                <div class="card-header">
+                  <div class="card-title">
+                    Información del estudiante
+                  </div>
+                </div>
+                <div class="card-body">
+                      <div class="row">
+                          <div class="form-group col-md-6 col-xs-6">
+                              <label for="code_student">Código</label>
+                              <div class="input-group input-group-mini">
+                                  <input type="text" name="code_student" id="code_student" class="form-control form-control-sm col-md-12">
+                                  <i class="far fa-id-card"></i>
+                              </div>
+                              <div class="error error_codestd">
+
+                              </div>
+                          </div>
+                          <div class="form-group col-md-6 col-xs-6">
+                              <label for="name_student">Nombre</label>
+                              <div class="input-group input-group-mini">
+                                  <input type="text" name="name_student" id="name_student" class="form-control form-control-sm col-md-12">
+                                  <i class="fa fa-user-graduate"></i>
+                              </div>
+                              <div class="error error-namestd">
+
+                              </div>
+                          </div>
+                    </div>
+                      <div class="row">
+                          <div class="form-group col-md-6 col-xs-6">
+                              <label for="email">Correo electrónico</label>
+                              <div class="input-group input-group-mini">
+                                  <input type="email" name="email" id="email" class="form-control form-control-sm">
+                                  <i class="fa fa-at"></i>
+                              </div>
+                              <div class="error error-emailstd">
+
+                              </div>
+                          </div>
+                          <div class="form-group col-md-6 col-xs-6">
+                              <label for="telefono">Teléfono</label>
+                              <div class="input-group input-group-mini">
+                                  <input type="text" name="telefono" id="telefono" class="form-control form-control-sm">
+                                  <i class="fas fa-mobile-alt"></i>
+                              </div>
+                              <div class="error error-telstd">
+
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group col-md-6 col-xs-6">
+                              <label for="semestre">Semestre</label>
+                              <div class="input-group input-group-mini">
+                                  <select name="semestre" id="semestre" class="form-control form-control-sm">
+                                      <option value="I">I</option>
+                                      <option value="II">II</option>
+                                      <option value="III">III</option>
+                                      <option value="IV">IV</option>
+                                      <option value="V">V</option>
+                                      <option value="VI">VI</option>
+                                      <option value="VII">VII</option>
+                                      <option value="VIII">VIII</option>
+                                  </select>
+                                  <i class="far fa-calendar-alt"></i>
+                              </div>
+                              <div class="error-error-semestre">
+
+                              </div>
+                          </div>
+                          <div class="form-group col-md-6 col-xs-6"></div>
+                      </div>
+                </div>
             </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="form-group col-md-6 col-xs-6">
-                  <label for="code_student">Código</label>
-                  <div class="input-group input-group-mini">
-                    <input type="text" name="code_student" id="code_student" class="form-control form-control-sm col-md-12">
-                    <i class="far fa-id-card"></i>
-                  </div>
-                </div>
-                <div class="form-group col-md-6 col-xs-6">
-                  <label for="name_student">Nombre</label>
-                  <div class="input-group input-group-mini">
-                    <input type="text" name="name_student" id="name_student" class="form-control form-control-sm col-md-12">
-                    <i class="fa fa-user-graduate"></i>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6 col-xs-6">
-                  <label for="email">Correo electrónico</label>
-                  <div class="input-group input-group-mini">
-                    <input type="email" name="email" id="email" class="form-control form-control-sm">
-                    <i class="fa fa-at"></i>
-                  </div>
-                </div>
-                <div class="form-group col-md-6 col-xs-6">
-                  <label for="telefono">Teléfono</label>
-                  <div class="input-group input-group-mini">
-                    <input type="text" name="telefono" id="telefono" class="form-control form-control-sm">
-                    <i class="fas fa-mobile-alt"></i>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6 col-xs-6">
-                  <label for="semestre">Semestre</label>
-                  <div class="input-group input-group-mini">
-                    <select name="semestre" id="semestre" class="form-control form-control-sm">
-                      <option value="I">I</option>
-                      <option value="II">II</option>
-                      <option value="III">III</option>
-                      <option value="IV">IV</option>
-                      <option value="V">V</option>
-                      <option value="VI">VI</option>
-                      <option value="VII">VII</option>
-                      <option value="VIII">VIII</option>
-                    </select>
-                    <i class="far fa-calendar-alt"></i>
-                  </div>
-                </div>
-                <div class="form-group col-md-6 col-xs-6"></div>
-              </div>
-            </div>
-          </div>
             <div class="card card-default my-1">
             <div class="card-header">
               <div class="card-title">
@@ -192,7 +207,7 @@
         <button type="button" name="save_receipt" id="save_receipt" class="btn btn-primary btn-sm my-1"><i class="fa fa-database"></i> Guardar</button>
         <button type="button" name="print_reciept" id="print_reciept" class="btn btn-primary btn-sm my-1"><i class="fas fa-print"></i> Imprimir</button>
         <button type="button" name="update_receipt" id="update_receipt" class="btn btn-success btn-sm my-1"><i class="fa fa-redo-alt"></i> Modificar</button>
-        <button type="button" name="exit_reciept" id="exit_reciept" class="btn btn-danger btn-sm my-1" data-dismiss="modal" onclick="clearReceiptForm()"><i class="fas fa-times"></i> Cerrar</button>
+        <button type="button" name="exit_reciept" id="exit_reciept" class="btn btn-danger btn-sm my-1" data-dismiss="modal" onclick="clearOrderForm()"><i class="fas fa-times"></i> Cerrar</button>
       </div>
     </div>
   </form>

@@ -12,10 +12,4 @@ class ReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function products()
-    {
-        $products = Product::select('PRODUCT_CODE','PRODUCT_NAME','PRODUCT_VAL')->orderBy('PRODUCT_CODE','desc')->get();
-        return view('receipt.productList', compact('products'));
-    }
 }
