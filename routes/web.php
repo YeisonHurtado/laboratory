@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::get('menu', 'MenuController@index')->name('menu');
 
+Route::resource('estudiante','StudentController');
 Route::get('estudiante/{codigo}','StudentController@show');
 Route::get('estudiante/{codigo}/pacientes/', 'StudentController@patients');
 

@@ -1,5 +1,5 @@
 <form action="" id="order_form" class="form p-1">
-    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+    {{csrf_field()}}
     <input type="hidden" name="fechaIngreso" id="fechaIngreso" value="">
     <div class="modal-header">
       <h4 class="modal-title">LABORATORIO PINTO - RECIBO DE CONSIGNACIÓN</h4>
@@ -21,7 +21,7 @@
                                   <input type="text" name="code_student" id="code_student" class="form-control form-control-sm col-md-12">
                                   <i class="far fa-id-card"></i>
                               </div>
-                              <div class="error error_codestd">
+                              <div class="error-codestd text-danger d-none">
 
                               </div>
                           </div>
@@ -31,7 +31,7 @@
                                   <input type="text" name="name_student" id="name_student" class="form-control form-control-sm col-md-12">
                                   <i class="fa fa-user-graduate"></i>
                               </div>
-                              <div class="error error-namestd">
+                              <div class="error-namestd text-danger d-none">
 
                               </div>
                           </div>
@@ -43,7 +43,7 @@
                                   <input type="email" name="email" id="email" class="form-control form-control-sm">
                                   <i class="fa fa-at"></i>
                               </div>
-                              <div class="error error-emailstd">
+                              <div class="error-emailstd text-danger d-none">
 
                               </div>
                           </div>
@@ -53,7 +53,7 @@
                                   <input type="text" name="telefono" id="telefono" class="form-control form-control-sm">
                                   <i class="fas fa-mobile-alt"></i>
                               </div>
-                              <div class="error error-telstd">
+                              <div class="error-telstd text-danger d-none">
 
                               </div>
                           </div>
@@ -74,7 +74,7 @@
                                   </select>
                                   <i class="far fa-calendar-alt"></i>
                               </div>
-                              <div class="error-error-semestre">
+                              <div class="error-semestre text-danger d-none">
 
                               </div>
                           </div>
@@ -90,19 +90,25 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="form-group col-md-6 col-xs-6">
-                  <label for="nhc">Número de historia clínica</label>
-                  <div class="input-group input-group-mini">
-                    <i class="far fa-file-alt"></i>
-                    <input type="text" name="nhc" id="nhc" class="form-control form-control-sm col-md-12" value="">
+                  <div class="form-group col-md-6 col-xs-6">
+                      <label for="nhc">Número de historia clínica</label>
+                      <div class="input-group input-group-mini">
+                          <i class="far fa-file-alt"></i>
+                          <input type="text" name="nhc" id="nhc" class="form-control form-control-sm col-md-12" value="">
+                      </div>
+                      <div class="error_numhc text-danger d-none">
+
+                      </div>
                   </div>
-                </div>
                 <div class="form-group col-md-6 col-xs-6">
-                  <label for="name_patient">Nombre completo</label>
-                  <div class="input-group input-group-mini">
-                    <input type="text" name="name_patient" id="name_patient" class="form-control form-control-sm col-md-12">
-                    <i class="far fa-user"></i>
-                  </div>
+                    <label for="name_patient">Nombre completo</label>
+                    <div class="input-group input-group-mini">
+                        <input type="text" name="name_patient" id="name_patient" class="form-control form-control-sm col-md-12">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <div class="error-namepatient text-danger d-none">
+
+                    </div>
                 </div>
               </div>
             </div>
