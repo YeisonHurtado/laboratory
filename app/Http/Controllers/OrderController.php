@@ -44,12 +44,57 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = new Order();
         $validate = Validator::make($request->all(),[
-            'code_student'=>'required|min:9|max:9',
-            'name_student'=>'required|max:50'
+            'mto_pago'=>'required'
         ]);
 
+        if ($validate->fails()){
+            return response()->json(['errors'=>$validate->errors()]);
+        }
+
+        if ($request->get('code_product')){
+            $order = new Order();
+            $order->EST_COD = $request->get('code_student');
+            $order->HCLINICA = $request->get('nhc');
+            $order->METODO_PAGO = $request->get('mto_pago');
+            $order->VACIADO = $request->get('vaciado');
+            $order->REPETICION = $request->get('repeticion');
+            $order->TOTAL_ORDEN = $request->get('total_pagar');
+            $order->ORDENID = $request->get('id_order');
+            $result = $order->save();
+
+            $code = array();
+            $quantity = array();
+            $total = array();
+
+            foreach ($request->get('code_product') as $index => $value){
+                $code[$index] = $value;
+            }
+            foreach ($request->get('quantity') as $index => $value){
+                $quantity[$index] = $value;
+            }
+
+            foreach ($request->get('total_item') as $index => $value){
+                $total[$index] = $value;
+            }
+
+            $length = count($total);
+            $orders = Order::all();
+            $idOrder = $orders->last();
+
+            for ($i = 0; $i < $length; $i++){
+                $idOrder->products()->attach([$code[$i]=>['CANTIDAD'=>$quantity[$i],'TOTAL_ITEM'=>$total[$i]]]);
+            }
+
+            if ($result){
+                return response()->json(['save'=>'true']);
+            } else {
+                return response()->json(['save'=>'false']);
+            }
+        }
+        else {
+            return response()->json(['products'=>'false']);
+        }
     }
 
     /**

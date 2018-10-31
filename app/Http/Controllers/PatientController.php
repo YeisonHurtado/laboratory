@@ -20,6 +20,11 @@ class PatientController extends Controller
         return view('patient.tables.patients', compact('patients'));
     }
 
+    public function secondOrder($id)
+    {
+        $orders = Order::select('');
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -38,7 +43,8 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        $patient = new Patient();
+        $countPatient = Patient::where('NUM_PACIENTE',$request->get('nhc'))->count();
+        $nhc = $request->get('nhc');
 
         $validate = Validator::make($request->all(),[
             'nhc'=>'required',
@@ -49,6 +55,11 @@ class PatientController extends Controller
             return response()->json(['errors'=>$validate->errors()]);
         }
 
+        if ($countPatient == 1) {
+            return $this->update($request, $nhc);
+        }
+
+        $patient = new Patient();
         $patient->NUM_PACIENTE = $request->get('nhc');
         $patient->NOMBRE = $request->get('name_patient');
         $patient->EST_COD = $request->get('code_student');
@@ -93,15 +104,30 @@ class PatientController extends Controller
      */
     public function update(Request $request, $numhc)
     {
-        $patient = Patient::find($numhc);
-        $patient->EST_COD = $request->get('student_code');
-        $result = $patient->save();
 
-        if ($result){
-            return response()->json(['update'=>'true']);
+        if (empty($request->get('nhc'))) {
+            $patient = Patient::find($numhc);
+            $patient->EST_COD = $request->get('student_code');
+            $result = $patient->save();
+
+            if ($result){
+                return response()->json(['update'=>'true']);
+            } else {
+                return response()->json(['update'=>'false']);
+            }
         } else {
-            return response()->json(['update'=>'false']);
+            $patient = Patient::find($numhc);
+            $patient->EST_COD = $request->get('code_student');
+            $patient->NOMBRE = $request->get('name_patient');
+            $result = $patient->save();
+
+            if ($result){
+                return response()->json(['update'=>'true']);
+            } else {
+                return response()->json(['update'=>'false']);
+            }
         }
+
     }
 
     /**

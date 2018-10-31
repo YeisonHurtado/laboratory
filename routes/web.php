@@ -26,11 +26,13 @@ Route::resource('paciente','PatientController');
 Route::get('paciente/{num}/show','PatientController@show');
 Route::get('paciente/{num}/all','PatientController@index');
 
+
 Route::resource('/productos','ProductController');
 Route::post('addproductos', 'ProductController@store');
 Route::get('lista/productos/{code?}','ProductController@listproducts');
 Route::get('name/productos/{nameproduct?}','ProductController@searchNameProduct');
 
+Route::post('orden','OrderController@store');
 Route::get('orden/producto','OrderController@products');
 
 Route::resource('/laboratorios','LaboratoryController');

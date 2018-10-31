@@ -1,5 +1,6 @@
 <form action="" id="order_form" class="form p-1">
     {{csrf_field()}}
+    <input type="hidden" name="id_order" id="id_order">
     <input type="hidden" name="fechaIngreso" id="fechaIngreso" value="">
     <div class="modal-header">
       <h4 class="modal-title">LABORATORIO PINTO - RECIBO DE CONSIGNACIÓN</h4>
@@ -96,7 +97,7 @@
                           <i class="far fa-file-alt"></i>
                           <input type="text" name="nhc" id="nhc" class="form-control form-control-sm col-md-12" value="">
                       </div>
-                      <div class="error_numhc text-danger d-none">
+                      <div class="error-numhc text-danger d-none">
 
                       </div>
                   </div>
@@ -126,8 +127,8 @@
                         </select>
                     </div>
                     <div class="form-group form-inline col-md-6 p-0 mt-1">
-                        <input type="number" id="cantidad" class="form-control form-control-sm col-md-6 mr-2" min="1" placeholder="Cantidad:" value="">
-                        <button type="button" id="btnAdd" class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Añadir</button>
+                        <input type="number" id="cantidad" class="form-control form-control-sm col-md-6 mr-2 my-2" min="1" placeholder="Cantidad:" value="">
+                        <button type="button" id="btnAdd" class="btn btn-primary btn-sm col-md-4 col-lg-4 col-sm-4"><i class="fas fa-cart-plus"></i> Añadir</button>
                     </div>
                     <div class="col-md-12 my-2">
                         <div class="error-add error-add-product">¡Escoge un producto!</div>
@@ -188,10 +189,10 @@
                             <label for="mto_pago1"><input type="radio" name="mto_pago" id="mto_pago1" value="1"> Primer pago 50%</label>
                         </div>
                         <div class="radio">
-                            <label for="mto_pago2"><input type="radio" name="mto_pago" id="mto_pago2" value="1"> Segundo pago 50%</label>
+                            <label for="mto_pago2"><input type="radio" name="mto_pago" id="mto_pago2" value="2"> Segundo pago 50%</label>
                         </div>
                         <div class="radio">
-                            <label for="mto_pagoU"><input type="radio" name="mto_pago" id="mto_pagoU" value="2"> Único pago</label>
+                            <label for="mto_pagoU"><input type="radio" name="mto_pago" id="mto_pagoU" value="3"> Único pago 100%</label>
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12">

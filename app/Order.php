@@ -23,4 +23,9 @@ class Order extends Model
     {
         return $this->belongsTo('App\Patient', 'HCLINICA', 'NUM_PACIENTE');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Product', 'DETALLE_PAGO', 'ID_ORDEN', 'COD_PROD')->withPivot('CANTIDAD', 'TOTAL_ITEM')->withTimestamps();
+    }
 }

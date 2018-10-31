@@ -44,6 +44,24 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        $countStudents = Student::where('EST_COD',$request->get('code_student'))->count();
+        $code = $request->get('code_student');
+        $validate = Validator::make($request->all(),[
+            'code_student'=>'required|min:9|max:9',
+            'name_student'=>'required|max:50',
+            'email'=>'required|email|max:50',
+            'telefono'=>'required|max:11',
+            'semestre'=>'required'
+        ]);
+
+        if ($validate->fails()){
+            return response()->json(['errors'=>$validate->errors()]);
+        }
+
+        if ($countStudents == 1) {
+            return $this->update($request, $code);
+        }
+
         $student = new Student();
         $validate = Validator::make($request->all(),[
             'code_student'=>'required|min:9|max:9',
@@ -57,7 +75,7 @@ class StudentController extends Controller
             return response()->json(['errors'=>$validate->errors()]);
         }
 
-        $student->EST_CODE = $request->get('code_student');
+        $student->EST_COD = $request->get('code_student');
         $student->NOMBRE_EST = $request->get('name_student');
         $student->CORREO = $request->get('email');
         $student->TEL_CEL = $request->get('telefono');
@@ -104,7 +122,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json(['update'=>'true']);
     }
 
     /**

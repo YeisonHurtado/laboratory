@@ -63,6 +63,13 @@ $(document).ready(function (event) {
 
     });
 
+    $('#mto_pago1, #mto_pago2').on('click', function (e) {
+        if ($(this).prop('checked') == true){
+            var total = totalOrder()*0.50;
+            $('#total_pagar').val(total);
+        }
+    })
+
     $('#save_receipt').on('click', function (e) {
         saveStudent();
     });
@@ -188,12 +195,12 @@ $(document).ready(function (event) {
         var ok = true;
 
         if ($('#select_product').val() == ""){
-            $('div.error-add-product').fadeIn(500).delay(2000).fadeOut(500);
+            $('div.error-add-product').fadeIn(500).delay(7000).fadeOut(500);
             ok = false;
         }
 
         if ($('#cantidad').val() == "" || $('#cantidad').val() == 0) {
-            $('div.error-add-quantity').fadeIn(500).delay(2000).fadeOut(500);
+            $('div.error-add-quantity').fadeIn(500).delay(7000).fadeOut(500);
             ok = false;
         }
 
@@ -208,13 +215,13 @@ $(document).ready(function (event) {
             dataType: 'json',
             success: function (data) {
                 $('table#product_adds tbody').append('<tr>' +
-                    '<td> <input type="text" name="receipt[codigo_prod]" class="codigo_prod form-control form-control-sm" readonly value="' + data.PRODUCT_CODE + '"> </td>' +
+                    '<td> <input type="text" name="code_product[]" class="code_product form-control form-control-sm" readonly value="' + data.PRODUCT_CODE + '"> </td>' +
                     '<td>'+data.PRODUCT_NAME+'</td>' +
                     '<td><i class="fa fa-dollar-sign"></i> '+data.PRODUCT_VAL+'</td>' +
-                    '<td> <input type="number" name="receipt[cantidad]" class="cantidad_prod form-control form-control-sm" readonly value="' + quantity + '"> </td>' +
+                    '<td> <input type="number" name="quantity[]" class="quantity_prod form-control form-control-sm" readonly value="' + quantity + '"> </td>' +
                     '<td class="">' +
                     '<div class="input-group input-group-mini">' +
-                    '<input type="number" name="receipt[cantidad]" class="total_prod form-control form-control-sm" readonly value="' + data.PRODUCT_VAL * quantity + '">' +
+                    '<input type="number" name="total_item[]" class="total_item form-control form-control-sm" readonly value="' + data.PRODUCT_VAL * quantity + '">' +
                     '<i class="fa fa-dollar-sign"></i>' +
                     '</div>' +
                     '</td>' +
@@ -238,8 +245,8 @@ $(document).ready(function (event) {
             dataType: 'json',
             data: $('#order_form').serialize(),
             success: function (data) {
-                if (data.save == "true"){
-
+                if (data.save == "true" || data.update == "true"){
+                    savePatient(token);
                 } else if (data.save == "false") {
                     
                 }
@@ -248,35 +255,105 @@ $(document).ready(function (event) {
                     if (data.errors.code_student) {
                         $('.error-codestd').removeClass('d-none');
                         $('.error-codestd').text(data.errors.code_student[0]);
-                        $('.error-codestd').fadeIn(500).delay(2000).fadeOut(500);
+                        $('.error-codestd').fadeIn(500).delay(7000).fadeOut(500);
                     }
 
                     if (data.errors.name_student) {
                         $('.error-namestd').removeClass('d-none');
                         $('.error-namestd').text(data.errors.name_student[0]);
-                        $('.error-namestd').fadeIn(500).delay(2000).fadeOut(500);
+                        $('.error-namestd').fadeIn(500).delay(7000).fadeOut(500);
                     }
 
                     if (data.errors.email) {
                         $('.error-emailstd').removeClass('d-none');
                         $('.error-emailstd').text(data.errors.email[0]);
-                        $('.error-emailstd').fadeIn(500).delay(2000).fadeOut(500);
+                        $('.error-emailstd').fadeIn(500).delay(7000).fadeOut(500);
                     }
 
                     if (data.errors.telefono) {
                         $('.error-telstd').removeClass('d-none');
                         $('.error-telstd').text(data.errors.telefono[0]);
-                        $('.error-telstd').fadeIn(500).delay(2000).fadeOut(500);
+                        $('.error-telstd').fadeIn(500).delay(7000).fadeOut(500);
                     }
 
                     if (data.errors.semestre) {
                         $('.error-semestre').removeClass('d-none');
                         $('.error-semestre').text(data.errors.semestre[0]);
-                        $('.error-semestre').fadeIn(500).delay(2000).fadeOut(500);
+                        $('.error-semestre').fadeIn(500).delay(7000).fadeOut(500);
                     }
                 }
             }
         });
+    }
+    
+    function savePatient() {
+        var route = "paciente";
+        var token = $('input[name="_token"]').val();
+
+        $.ajax({
+            url: route,
+            headers: {'X-CSRF-TOKEN':token},
+            type: 'POST',
+            dataType: 'json',
+            data: $('#order_form').serialize(),
+            success: function (data) {
+                if (data.save == "true" || data.update == "true"){
+                    saverOrder();
+                } else if (data.save == "false"){
+                
+                }
+
+                if (data.errors){
+                    if (data.errors.nhc){
+                        $('.error-numhc').removeClass('d-none');
+                        $('.error-numhc').text(data.errors.nhc[0]);
+                        $('.error-numhc').fadeIn(500).delay(7000).fadeOut(500);
+                    }
+                    
+                    if (data.errors.name_patient){
+                        $('.error-namepatient').removeClass('d-none');
+                        $('.error-namepatient').text(data.errors.name_patient[0]);
+                        $('.error-namepatient').fadeIn(500).delay(7000).fadeOut(500);
+                    }
+                }
+            },
+            error: function (data) {
+                console.log('Algo anda mal :(');
+            }
+        });
+    }
+    
+    function saverOrder() {
+        var route = "orden";
+        var token = $('input[name="_token"]').val();
+
+        $.ajax({
+            url: route,
+            headers: {'X-CSRF-TOKEN':token},
+            type: 'POST',
+            data: $('#order_form').serialize(),
+            dataType: 'json',
+            success: function (data) {
+                if (data.save == "true"){
+                    console.log('La orden de pago se registro correctamente');
+                } else if (data.save == "false"){
+                    console.log('No se pudo realizar la orde de pago');
+                }
+                
+                if (data.products == "false"){
+                    console.log('Escoge productos');
+                }
+            },
+        });
+    }
+    
+    function totalOrder() {
+        var subTotal = 0;
+        $('input.total_item').each(function () {
+            subTotal = subTotal + Number($(this).val());
+        });
+
+        return subTotal;
     }
 
 // ---------------------------------------------------------------- //
