@@ -59,16 +59,33 @@ $(document).ready(function (event) {
             $('#select_product').val('');
             $('#select_product option[value="'+ code + '"]').css('display','none');
             $('#cantidad').val('');
+            var row = Number(countProducts()) + 1;
+            if (row > 0) {
+                $('#mto_pago1, #mto_pago2, #mto_pagoU').prop({
+                    'checked': false,
+                    'disabled': false
+                });
+                $('#total_pagar').val('');
+            }
         }
 
     });
 
     $('#mto_pago1, #mto_pago2').on('click', function (e) {
-        if ($(this).prop('checked') == true){
-            var total = totalOrder()*0.50;
-            $('#total_pagar').val(total);
+        if (totalOrder() > 0){
+            if ($(this).prop('checked') == true){
+                var total = totalOrder()*0.50;
+                $('#total_pagar').val(total);
+            }
         }
-    })
+    });
+
+    $('#mto_pagoU').on('click', function (e) {
+        if (totalOrder() > 0) {
+            if ($(this).prop('checked'))
+                $('#total_pagar').val(totalOrder());
+        }
+    });
 
     $('#save_receipt').on('click', function (e) {
         saveStudent();
@@ -78,6 +95,22 @@ $(document).ready(function (event) {
         var code = $(this).attr('data-removeItem');
         $('#select_product option[value="'+ code + '"]').css('display','block');
         $(this).parents('tr').remove();
+        var row = Number(countProducts());
+        
+        if (row == 0) {
+            $('#mto_pago1, #mto_pago2, #mto_pagoU').prop({
+                'checked': false,
+                'disabled': true
+            });
+            $('#total_pagar').val('');
+        } else if (row > 0) {
+            $('#mto_pago1, #mto_pago2, #mto_pagoU').prop({
+                'checked': false,
+                'disabled': false
+            });
+            $('#total_pagar').val('');
+        }
+
     });
     
     $(document).on('click', '.patient_item', function (e) {
@@ -354,6 +387,15 @@ $(document).ready(function (event) {
         });
 
         return subTotal;
+    }
+    
+    function countProducts() {
+        var row = 0;
+        $('table#product_adds tbody tr').each(function () {
+            row ++;
+        });
+
+        return row;
     }
 
 // ---------------------------------------------------------------- //

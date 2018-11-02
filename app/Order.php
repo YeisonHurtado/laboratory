@@ -28,4 +28,9 @@ class Order extends Model
     {
         return $this->belongsToMany('App\Product', 'DETALLE_PAGO', 'ID_ORDEN', 'COD_PROD')->withPivot('CANTIDAD', 'TOTAL_ITEM')->withTimestamps();
     }
+
+    public function payments()
+    {
+        return $this->hasMany('App\Payment', 'ID_ORDEN', 'IDORDEN');
+    }
 }

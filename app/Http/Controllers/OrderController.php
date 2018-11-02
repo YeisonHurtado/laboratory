@@ -45,7 +45,8 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(),[
-            'mto_pago'=>'required'
+            'mto_pago'=>'required',
+            'total_pagar'=>'required|numeric'
         ]);
 
         if ($validate->fails()){
@@ -60,7 +61,6 @@ class OrderController extends Controller
             $order->VACIADO = $request->get('vaciado');
             $order->REPETICION = $request->get('repeticion');
             $order->TOTAL_ORDEN = $request->get('total_pagar');
-            $order->ORDENID = $request->get('id_order');
             $result = $order->save();
 
             $code = array();
