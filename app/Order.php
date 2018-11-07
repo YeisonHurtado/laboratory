@@ -10,8 +10,8 @@ class Order extends Model
     protected  $primaryKey = "IDORDEN";
     public  $incrementing = true;
     protected $fillable = [
-        "METODO_PAGO",
-        "REPETICION"
+        'METODO_PAGO',
+        'TOTAL_ORDEN'
     ];
 
     public function student()
@@ -32,5 +32,10 @@ class Order extends Model
     public function payments()
     {
         return $this->hasMany('App\Payment', 'ID_ORDEN', 'IDORDEN');
+    }
+
+    public function repetitions()
+    {
+        return $this->hasMany('App\Repetition', 'ID_ORDEN', 'IDORDEN');
     }
 }

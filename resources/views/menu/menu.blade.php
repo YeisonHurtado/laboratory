@@ -39,4 +39,5 @@
 @include("deletemodals.laboratoryDelete")
 @include("patient.patients_student")
 @include("patient.allpatients")
+@include("pending.payments.modal")
 @endsection

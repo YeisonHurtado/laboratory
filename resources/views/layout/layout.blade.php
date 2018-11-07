@@ -36,6 +36,7 @@
     @include('footer.footer')
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/scriptReceipt.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/scriptPayments.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/scriptProducts.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/scriptLaboratory.js')}}"></script>
     </body>

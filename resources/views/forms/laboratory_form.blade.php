@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div id="products_laboratory" class="products_add table-responsive mt-2">
-                    <table id="table_lab_product" class="table table-striped">
+                    <table id="table_lab_product" class="table table-striped scroll-x">
                         <thead>
                         <tr>
                             <th>Código</th>

@@ -33,7 +33,11 @@ Route::get('lista/productos/{code?}','ProductController@listproducts');
 Route::get('name/productos/{nameproduct?}','ProductController@searchNameProduct');
 
 Route::post('orden','OrderController@store');
+Route::post('orden/segunda','OrderController@storeSecondPayment');
 Route::get('orden/producto','OrderController@products');
+Route::get('orden/{idOrden}/productos/','OrderController@productsOrder');
+
+Route::get('pagos/','OrderPaymentsViewController@viewIndex');
 
 Route::resource('/laboratorios','LaboratoryController');
 Route::post('addlaboratorio','LaboratoryController@store');

@@ -22,4 +22,9 @@ class Patient extends Model
     {
         return $this->hasMany('App\Order', 'HCLINICA', 'NUM_PACIENTE');
     }
+
+    public function foundries()
+    {
+        return $this->hasMany('App\Foundry', 'HCLINICA', 'NUM_PACIENTE');
+    }
 }

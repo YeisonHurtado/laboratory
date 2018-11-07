@@ -1,3 +1,29 @@
+var vaciado = false;
+var repeticion = false;
+var segundoPago = false;
+var unicoPago = false;
+
+if ($('#vaciado_si').prop('checked'))
+    vaciado = true;
+
+if ($('#vaciado_no').prop('checked')){
+    vaciado = false;
+    repeticion = false;
+}
+
+if ($('#repeticion_si').prop('checked'))
+    repeticion = true;
+
+if ($('#repeticion_no').prop('checked'))
+    repeticion = false;
+
+if ($('#mto_pago2').prop('checked')){
+    segundoPago = true;
+    unicoPago = false;
+} else {
+    segundoPago = false;
+}
+
 $(document).ready(function (event) {
     orderProductList('orden/producto');
     disabledAllInputs();
@@ -51,6 +77,28 @@ $(document).ready(function (event) {
         updatePatientStudent(code, token);
     });
 
+    $('#vaciado_si, #vaciado_no').on('click', function (e) {
+        if ($('#vaciado_si').prop('checked')){
+            vaciado = true;
+            $('#repeticion').css('display','inherit');
+        }
+
+        if ($('#vaciado_no').prop('checked')){
+            vaciado = false;
+            $('#repeticion').css('display','none');
+            $('#repeticion_no').prop('checked', true);
+            repeticion = false;
+        }
+    });
+
+    $('#repeticion_si, #repeticion_no').on('click', function (e) {
+        if ($('#repeticion_si').prop('checked'))
+            repeticion = true;
+
+        if ($('#repeticion_no').prop('checked'))
+            repeticion = false;
+    });
+
     $('#btnAdd').on('click', function (e) {
         var code = $('#select_product').val();
         var quantity = $('#cantidad').val();
@@ -75,16 +123,34 @@ $(document).ready(function (event) {
         if (totalOrder() > 0){
             if ($(this).prop('checked') == true){
                 var total = totalOrder()*0.50;
+                $('#total').val(totalOrder());
                 $('#total_pagar').val(total);
             }
+        }
+        if ($('#mto_pago1').prop('checked')){
+            pendingPayment();
+            segundoPago = false;
+            unicoPago = false;
+        }
+
+        if ($('#mto_pago2').prop('checked')){
+            pendingPayment();
+            segundoPago = true;
+            unicoPago = false;
+        } else {
+            segundoPago = false;
         }
     });
 
     $('#mto_pagoU').on('click', function (e) {
         if (totalOrder() > 0) {
-            if ($(this).prop('checked'))
+            if ($(this).prop('checked')) {
+                $('#total').val(totalOrder());
                 $('#total_pagar').val(totalOrder());
+            }
         }
+        unicoPago = true;
+        segundoPago = false;
     });
 
     $('#save_receipt').on('click', function (e) {
@@ -117,7 +183,7 @@ $(document).ready(function (event) {
         $('tr.patient_item').removeClass('bg-info text-light');
         $(this).toggleClass('bg-info text-light');
         $('#show_patient').attr('disabled', false);
-        $('#show_patient').attr('data-numHC',$(':first-child',this).text())
+        $('#show_patient').attr('data-numHC',$(':first-child',this).text());
     });
 
     $(document).on('click', '.patients_items', function (e) {
@@ -125,7 +191,7 @@ $(document).ready(function (event) {
         $('tr.patients_items').removeClass('bg-info text-light');
         $(this).toggleClass('bg-info text-light');
         $('#change_student').attr('disabled', false);
-        $('#change_student').attr('data-numHC',$(':first-child',this).text())
+        $('#change_student').attr('data-numHC',$(':first-child',this).text());
     });
 });
 
@@ -224,6 +290,17 @@ $(document).ready(function (event) {
         });
     }
 
+    function pendingPayment() {
+        $.ajax({
+            url: 'pagos',
+            type: 'get',
+            success: function (data) {
+                $('#paymentsModal').modal('show');
+                $('#payments tbody').html(data);
+            }
+        });
+    }
+    
     function validateAddProduct() {
         var ok = true;
 
@@ -289,24 +366,28 @@ $(document).ready(function (event) {
                         $('.error-codestd').removeClass('d-none');
                         $('.error-codestd').text(data.errors.code_student[0]);
                         $('.error-codestd').fadeIn(500).delay(7000).fadeOut(500);
+                        $('#code_student').focus();
                     }
 
                     if (data.errors.name_student) {
                         $('.error-namestd').removeClass('d-none');
                         $('.error-namestd').text(data.errors.name_student[0]);
                         $('.error-namestd').fadeIn(500).delay(7000).fadeOut(500);
+                        $('#name_student').focus();
                     }
 
                     if (data.errors.email) {
                         $('.error-emailstd').removeClass('d-none');
                         $('.error-emailstd').text(data.errors.email[0]);
                         $('.error-emailstd').fadeIn(500).delay(7000).fadeOut(500);
+                        $('#email').focus();
                     }
 
                     if (data.errors.telefono) {
                         $('.error-telstd').removeClass('d-none');
                         $('.error-telstd').text(data.errors.telefono[0]);
                         $('.error-telstd').fadeIn(500).delay(7000).fadeOut(500);
+                        $('#telefono').focus();
                     }
 
                     if (data.errors.semestre) {
@@ -331,7 +412,7 @@ $(document).ready(function (event) {
             data: $('#order_form').serialize(),
             success: function (data) {
                 if (data.save == "true" || data.update == "true"){
-                    saverOrder();
+                    saveOrder();
                 } else if (data.save == "false"){
                 
                 }
@@ -356,28 +437,59 @@ $(document).ready(function (event) {
         });
     }
     
-    function saverOrder() {
+    function saveOrder() {
         var route = "orden";
         var token = $('input[name="_token"]').val();
 
-        $.ajax({
-            url: route,
-            headers: {'X-CSRF-TOKEN':token},
-            type: 'POST',
-            data: $('#order_form').serialize(),
-            dataType: 'json',
-            success: function (data) {
-                if (data.save == "true"){
-                    console.log('La orden de pago se registro correctamente');
-                } else if (data.save == "false"){
-                    console.log('No se pudo realizar la orde de pago');
+        if (!segundoPago) {
+            $.ajax({
+                url: route,
+                headers: {'X-CSRF-TOKEN':token},
+                type: 'POST',
+                data: $('#order_form').serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    if (data.save == "true"){
+                        $('#order_message').removeClass('d-none alert alert-danger border-danger text-danger');
+                        $('#order_message').addClass('alert alert-success border-success text-success');
+                        $('#order_message').text("Orden de pago guardada.");
+                        $('#order_message').fadeIn(2000).delay(8000).fadeOut(2000);
+                        clearOrderForm();
+                    } else if (data.save == "false"){
+                        $('#order_message').removeClass('d-none alert alert-success border-success text-success');
+                        $('#order_message').addClass('alert alert-danger border-danger text-danger');
+                        $('#order_message').text("No se pudo guardar.");
+                        $('#order_message').fadeIn(2000).delay(8000).fadeOut(2000);
+                    }
+
+                    if (data.products == "false"){
+                        console.log('Escoge productos');
+                    }
+                },
+            });
+        } else if (segundoPago) {
+            $.ajax({
+                url: route+'/segunda',
+                headers: {'X-CSRF-TOKEN':token},
+                type: 'POST',
+                data: $('#order_form').serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    if (data.save == "true"){
+                        $('#order_message').removeClass('d-none alert alert-danger border-danger text-danger alert-success border-success text-success');
+                        $('#order_message').addClass('alert alert-success border-success text-success');
+                        $('#order_message').text("Segunda orden de pago guardada. Queda pendiente para pagar en caja.");
+                        $('#order_message').fadeIn(2000).delay(8000).fadeOut(2000);
+                        clearOrderForm();
+                    } else if (data.save == "false"){
+                        $('#order_message').removeClass('d-none alert alert-success border-success text-success');
+                        $('#order_message').addClass('alert alert-danger border-danger text-danger');
+                        $('#order_message').text("No se pudo guardar.");
+                        $('#order_message').fadeIn(2000).delay(8000).fadeOut(2000);
+                    }
                 }
-                
-                if (data.products == "false"){
-                    console.log('Escoge productos');
-                }
-            },
-        });
+            });
+        }
     }
     
     function totalOrder() {

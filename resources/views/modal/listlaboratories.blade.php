@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div id="lab_table" class="table-responsive">
-                        <table id="labs_add" class="table table-sm table-hover table-striped table-bordered">
+                        <table id="labs_add" class="table table-sm table-hover table-striped table-bordered scroll-x">
                             <thead>
                                 <th>Laboratorio</th>
                                 <th>Dirección</th>

@@ -25,4 +25,9 @@ class Student extends Model
     {
         return $this->hasMany('App\Order', 'EST_COD', 'EST_COD');
     }
+
+    public function foundries()
+    {
+        return $this->hasMany('App\Foundry', 'EST_COD', 'EST_COD');
+    }
 }
