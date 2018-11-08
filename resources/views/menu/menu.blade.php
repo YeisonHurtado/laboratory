@@ -6,7 +6,7 @@
     <img src="{{asset('images/receipt.png')}}" alt="">
     <span>ORDEN DE PAGO</span>
   </div>
-  <div class="menu" data-toggle="modal" data-target="#modalTrab">
+  <div class="menu"  data-toggle="modal" data-target="#entryModal">
     <img src="{{asset('images/trabajo.svg')}}" alt="">
     <span>AUTORIZACIÓN INGRESO TRABAJO LABORATORIO</span>
   </div>
@@ -30,6 +30,7 @@
   </div>
 </div>
 @include("modal.receipt")
+@include("modal.entry_work")
 @include("modal.products")
 @include("modal.listproducts")
 @include("modal.laboratories")
