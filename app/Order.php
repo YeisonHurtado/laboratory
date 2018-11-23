@@ -14,16 +14,6 @@ class Order extends Model
         'TOTAL_ORDEN'
     ];
 
-    public function student()
-    {
-        return $this->belongsTo('App\Student', 'EST_COD', 'EST_COD');
-    }
-
-    public function patient()
-    {
-        return $this->belongsTo('App\Patient', 'HCLINICA', 'NUM_PACIENTE');
-    }
-
     public function products()
     {
         return $this->belongsToMany('App\Product', 'DETALLE_PAGO', 'ID_ORDEN', 'COD_PROD')->withPivot('CANTIDAD', 'TOTAL_ITEM')->withTimestamps();
@@ -34,8 +24,18 @@ class Order extends Model
         return $this->hasMany('App\Payment', 'ID_ORDEN', 'IDORDEN');
     }
 
-    public function repetitions()
+    public function consult()
     {
-        return $this->hasMany('App\Repetition', 'ID_ORDEN', 'IDORDEN');
+        return $this->belongsTo('App\Consult', 'CONSULTA_ID', 'ID');
+    }
+    
+    public function foundry()
+    {
+        return $this->belongsTo('App\Foundry', 'VACIADO', 'ID');
+    }
+
+    public function entry()
+    {
+        return $this->hasOne('App\Entry', 'ID_ORDEN', 'IDORDEN');
     }
 }

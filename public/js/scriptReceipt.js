@@ -120,15 +120,10 @@ $(document).ready(function (event) {
     });
 
     $('#mto_pago1, #mto_pago2').on('click', function (e) {
-        if (totalOrder() > 0){
-            if ($(this).prop('checked') == true){
-                var total = totalOrder()*0.50;
-                $('#total').val(totalOrder());
-                $('#total_pagar').val(total);
-            }
+        if ($(this).prop('checked') == true){
+            totalOrder(0.50);
         }
         if ($('#mto_pago1').prop('checked')){
-            pendingPayment();
             segundoPago = false;
             unicoPago = false;
         }
@@ -143,11 +138,8 @@ $(document).ready(function (event) {
     });
 
     $('#mto_pagoU').on('click', function (e) {
-        if (totalOrder() > 0) {
-            if ($(this).prop('checked')) {
-                $('#total').val(totalOrder());
-                $('#total_pagar').val(totalOrder());
-            }
+        if ($(this).prop('checked')) {
+            totalOrder(1);
         }
         unicoPago = true;
         segundoPago = false;
@@ -335,6 +327,12 @@ $(document).ready(function (event) {
                     '<i class="fa fa-dollar-sign"></i>' +
                     '</div>' +
                     '</td>' +
+                    '<td>' +
+                    '<div class="input-group input-group-mini">' +
+                    '<input type="number" name="total[]" class="total form-control form-control-sm" readonly>' +
+                    '<i class="fa fa-dollar-sign"></i>' +
+                    '</div>' +
+                    '</td>' +
                     '<td><button type="button" class="btn btn-danger btn-sm btn-quitar-item" data-removeItem="' + data.PRODUCT_CODE + '"><i class="fas fa-trash-alt"></i> Quitar</button></td>' +
                     '</tr>');
             }
@@ -491,13 +489,22 @@ $(document).ready(function (event) {
             });
         }
     }
-    
-    function totalOrder() {
+
+    function totalOrder(percent) {
         var subTotal = 0;
+        var total = Array();
+        var i = 0;
         $('input.total_item').each(function () {
             subTotal = subTotal + Number($(this).val());
+            total[i] = Number($(this).val()) * percent;
+            i++;
         });
 
+        var j = 0;
+        $('input.total').each(function () {
+            $(this).val(total[j]);
+            j++;
+        });
         return subTotal;
     }
     

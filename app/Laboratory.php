@@ -22,4 +22,9 @@ class Laboratory extends Model
     {
         return $this->belongsToMany('App\Product', 'LAB_HAS_PRODUCTS', 'LAB_ID','CODE_PROD')->withPivot('COST', 'CHANGE_DATE')->withTimestamps();
     }
+
+    public function entries()
+    {
+        return $this->hasMany('App\Entry', 'LABORATORIO_ID', 'ID');
+    }
 }

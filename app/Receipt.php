@@ -10,15 +10,17 @@ class Receipt extends Model
     protected $primaryKey = "ID";
     public $incrementing = false;
     protected $fillable = [
+        'ID',
+        'ID_NUM_PAGOS',
         'CONSIGNADO'
     ];
 
-    public function invoices()
+    public function invoice()
     {
         return $this->belongsTo('App\Invoice', 'ID_FACTURA', 'IDFACTURA');
     }
 
-    public function payments()
+    public function payment()
     {
         return $this->belongsTo('App\Payment', 'ID_NUM_PAGOS', 'ID');
     }

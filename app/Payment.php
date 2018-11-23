@@ -18,9 +18,9 @@ class Payment extends Model
         return $this->belongsTo('App\Order', 'ID_ORDEN', 'IDORDEN');
     }
 
-    public function receipts()
+    public function receipt()
     {
-        return $this->hasMany('App\Receipt', 'ID_NUM_PAGOS', 'ID');
+        return $this->hasOne('App\Receipt', 'ID_NUM_PAGOS', 'ID');
     }
 
     public function invoicePos()

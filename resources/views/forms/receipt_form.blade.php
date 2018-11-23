@@ -3,7 +3,6 @@
     <input type="hidden" name="id_order" id="id_order">
     <input type="hidden" name="id_factura" id="id_factura">
     <input type="hidden" name="fechaIngreso" id="fechaIngreso" value="">
-    <input type="hidden" name="total" id="total" value="">
     <div class="modal-header">
       <h4 class="modal-title">LABORATORIO PINTO - RECIBO DE CONSIGNACIÓN</h4>
       <button type="button" class="close" data-dismiss="modal" onclick="clearOrderForm()">&times;</button>
@@ -22,7 +21,7 @@
                               <label for="code_student">Código</label>
                               <div class="input-group input-group-mini">
                                   <input type="text" name="code_student" id="code_student" class="form-control form-control-sm col-md-12">
-                                  <i class="far fa-id-card"></i>
+                                  <i class="fa fa-id-card"></i>
                               </div>
                               <div class="error-codestd text-danger d-none">
 
@@ -75,7 +74,7 @@
                                       <option value="VII">VII</option>
                                       <option value="VIII">VIII</option>
                                   </select>
-                                  <i class="far fa-calendar-alt"></i>
+                                  <i class="fa fa-calendar-alt"></i>
                               </div>
                               <div class="error-semestre text-danger d-none">
 
@@ -96,7 +95,7 @@
                   <div class="form-group col-md-6 col-xs-6">
                       <label for="nhc">Número de historia clínica</label>
                       <div class="input-group input-group-mini">
-                          <i class="far fa-file-alt"></i>
+                          <i class="fa fa-file-alt"></i>
                           <input type="text" name="nhc" id="nhc" class="form-control form-control-sm col-md-12" value="">
                       </div>
                       <div class="error-numhc text-danger d-none">
@@ -107,7 +106,7 @@
                     <label for="name_patient">Nombre completo</label>
                     <div class="input-group input-group-mini">
                         <input type="text" name="name_patient" id="name_patient" class="form-control form-control-sm col-md-12">
-                        <i class="far fa-user"></i>
+                        <i class="fa fa-user"></i>
                     </div>
                     <div class="error-namepatient text-danger d-none">
 
@@ -183,6 +182,7 @@
                             <th>Descripción</th>
                             <th>V. unitario</th>
                             <th>Cantidad</th>
+                            <th>Total</th>
                             <th>Total a pagar</th>
                             <th>Quitar</th>
                             </thead>

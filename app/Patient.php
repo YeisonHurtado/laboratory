@@ -18,13 +18,18 @@ class Patient extends Model
         return $this->belongsTo('App\Student', 'EST_COD', 'EST_COD');
     }
 
-    public function orders()
+    public function consults()
     {
-        return $this->hasMany('App\Order', 'HCLINICA', 'NUM_PACIENTE');
+        return $this->hasMany('App\Consult', 'HCLINICA', 'NUM_PACIENTE');
     }
 
     public function foundries()
     {
         return $this->hasMany('App\Foundry', 'HCLINICA', 'NUM_PACIENTE');
+    }
+
+    public function box()
+    {
+        return $this->hasOne('App\Box', 'PACIENTE_ID', 'NUM_PACIENTE');
     }
 }

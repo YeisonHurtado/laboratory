@@ -4,27 +4,28 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Foundry extends Model
+class Consult extends Model
 {
-    protected $table = "VACIADO";
+    protected $table = "CONSULTA";
     protected $primaryKey = "ID";
     public $incrementing = true;
     protected $fillable = [
-        'TOTAL'
+        'EST_COD',
+        'HCLINICA'
     ];
 
-    public function students()
+    public function student()
     {
         return $this->belongsTo('App\Student', 'EST_COD', 'EST_COD');
     }
 
-    public function patients()
+    public function patient()
     {
         return $this->belongsTo('App\Patient', 'HCLINICA', 'NUM_PACIENTE');
     }
 
-    public function orders()
+    public function order()
     {
-        return $this->hasMany('App\Order', 'VACIADO', 'ID');
+        return $this->hasOne('App\Order', 'CONSULTA_ID', 'ID');
     }
 }

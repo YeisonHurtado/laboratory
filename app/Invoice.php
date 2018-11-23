@@ -10,7 +10,7 @@ class Invoice extends Model
     protected $primaryKey = "IDFACTURA";
     public $incrementing = false;
     protected $fillable = [
-        'FECHA_CREACION',
+        'IDFACTURA',
         'TOTAL',
         'CANCELADO'
     ];

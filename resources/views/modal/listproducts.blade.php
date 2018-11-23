@@ -1,4 +1,4 @@
-<div class="modal fade" id="miModalListProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" onclick="clearForm()">
+<div class="modal fade" id="miModalListProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" onclick="clearForm()"data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form action="" id="productForm">

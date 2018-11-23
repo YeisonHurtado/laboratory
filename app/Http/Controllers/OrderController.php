@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Consult;
 use App\Order;
 use App\Product;
 use App\Payment;
@@ -19,15 +20,27 @@ class OrderController extends Controller
 
     public function productsOrder($idOrden)
     {
-        $order = Order::find($idOrden);
-        $arrayOrder = compact('order');
+        $result = $order = Order::find($idOrden);
+        //$count = count(compact('order'));
+
+        if ($result == null){
+            return response()->json(['show'=>'false']);
+        }
+
+        $consult = $order->consult;
+        $payment = $order->payments;
         $product = $order->products;
+        $student = $consult->student;
+        $patient = $consult->patient;
+        $box = $patient->box;
+
+        $arrayOrder = compact('order');
+        $arrayPayment = compact('payment');
         $arrayProducts = compact('product');
-        $student = $order->student;
         $arrayStudent = compact('student');
-        $patient = $order->patient;
         $arrayPatient = compact('patient');
-        $response = array_merge($arrayOrder, $arrayProducts, $arrayStudent, $arrayPatient);
+        $arrayBox = compact('box');
+        $response = array_merge($arrayOrder, $arrayPayment, $arrayProducts, $arrayStudent, $arrayPatient, $arrayBox);
         return response()->json($response);
     }
 
@@ -60,8 +73,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(),[
-            'mto_pago'=>'required',
-            'total_pagar'=>'required|numeric'
+            'mto_pago'=>'required'
         ]);
 
         if ($validate->fails()){
@@ -69,19 +81,15 @@ class OrderController extends Controller
         }
 
         if ($request->get('code_product')){
-            $order = new Order();
-            $order->EST_COD = $request->get('code_student');
-            $order->HCLINICA = $request->get('nhc');
-            $order->METODO_PAGO = $request->get('mto_pago');
-            $order->TOTAL_ORDEN = $request->get('total');
-            if ($request->get('mto_pago') == 2){
-                $order->CANCELADO = 1;
-            }
-            $result = $order->save();
+            $consult = new Consult(['EST_COD'=>$request->get('code_student'),'HCLINICA'=>$request->get('nhc')]);
+            $consult->save();
+            $idConsult = Consult::all();
+            $idConsult = $idConsult->last();
 
             $code = array();
             $quantity = array();
             $total = array();
+            $totalPercent = array();
 
             foreach ($request->get('code_product') as $index => $value){
                 $code[$index] = $value;
@@ -94,14 +102,25 @@ class OrderController extends Controller
                 $total[$index] = $value;
             }
 
-            $length = count($total);
-            $orders = Order::all();
-            $idOrder = $orders->last();
+            foreach ($request->get('total') as $index => $value){
+                $totalPercent[$index] = $value;
+            }
 
-            $payment = new Payment(['CONSIGNADO'=>$request->get('total_pagar')]);
-            $idOrder->payments()->save($payment);
+            $length = count($total);
+            $result = false;
 
             for ($i = 0; $i < $length; $i++){
+                $order = new Order();
+                $order->METODO_PAGO = $request->get('mto_pago');
+                $order->TOTAL_ORDEN = $total[$i];
+                if ($request->get('mto_pago') == 2){
+                    $order->CANCELADO = 1;
+                }
+                $result = $idConsult->order()->save($order);
+                $orders = Order::all();
+                $idOrder = $orders->last();
+                $payment = new Payment(['CONSIGNADO'=>$totalPercent[$i]]);
+                $idOrder->payments()->save($payment);
                 $idOrder->products()->attach([$code[$i]=>['CANTIDAD'=>$quantity[$i],'TOTAL_ITEM'=>$total[$i]]]);
             }
 

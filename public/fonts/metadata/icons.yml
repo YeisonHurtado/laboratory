@@ -1407,7 +1407,7 @@ bowling-ball:
 box:
   changes:
     - 5.0.7
-  label: Box
+  label: BoxController
   search:
     terms:
       - package
@@ -1417,7 +1417,7 @@ box:
 box-open:
   changes:
     - 5.0.9
-  label: Box Open
+  label: BoxController Open
   search:
     terms: []
   styles:
@@ -8913,7 +8913,7 @@ paperclip:
 parachute-box:
   changes:
     - 5.0.9
-  label: Parachute Box
+  label: Parachute BoxController
   search:
     terms:
       - aid

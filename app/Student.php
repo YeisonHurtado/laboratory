@@ -21,9 +21,9 @@ class Student extends Model
         return $this->hasMany('App\Patient', 'EST_COD', 'EST_COD');
     }
     
-    public function orders()
+    public function consults()
     {
-        return $this->hasMany('App\Order', 'EST_COD', 'EST_COD');
+        return $this->hasMany('App\Consult', 'EST_COD', 'EST_COD');
     }
 
     public function foundries()

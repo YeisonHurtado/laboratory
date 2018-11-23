@@ -45,6 +45,10 @@ function showOrder(idOrder) {
         type: 'get',
         dataType: 'json',
         success: function (data) {
+            if (data.show == "false"){
+                alert("Este número de orden no existe");
+                return false;
+            }
             $('#code_student').val(data.student.EST_COD);
             $('#name_student').val(data.student.NOMBRE_EST);
             $('#email').val(data.student.CORREO);

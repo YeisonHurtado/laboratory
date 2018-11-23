@@ -10,6 +10,8 @@ class InvoicePos extends Model
     protected $primaryKey = "ID";
     public $incrementing = false;
     protected $fillable = [
+        'ID',
+        'ID_PAGO',
         'TOTAL'
     ];
 

@@ -38,9 +38,13 @@ Route::get('orden/producto','OrderController@products');
 Route::get('orden/{idOrden}/productos/','OrderController@productsOrder');
 
 Route::get('pagos/','OrderPaymentsViewController@viewIndex');
+Route::post('addingreso', 'EntryController@store');
+
+Route::get('cajas', 'BoxController@boxList');
 
 Route::resource('/laboratorios','LaboratoryController');
 Route::post('addlaboratorio','LaboratoryController@store');
+Route::get('proveedores', 'LaboratoryController@providers');
 Route::get('lista/laboratorios/{nombrelab?}','LaboratoryController@listLaboratories');
 Route::get('laboratorio/nextid','LaboratoryController@idLaboratory');
 Route::delete('remove/{code}','LaboratoryController@removeProduct');

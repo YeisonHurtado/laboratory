@@ -20,6 +20,12 @@ class LaboratoryController extends Controller
         return view('laboratory.list', compact('laboratories'));
     }
 
+    public function providers()
+    {
+        $providers = Laboratory::all();
+        return view('laboratory.providers', compact('providers'));
+    }
+
     public function idLaboratory()
     {
         $laboratory = Laboratory::max('ID') + 1;
