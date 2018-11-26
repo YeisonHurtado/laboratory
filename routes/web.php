@@ -48,3 +48,5 @@ Route::get('proveedores', 'LaboratoryController@providers');
 Route::get('lista/laboratorios/{nombrelab?}','LaboratoryController@listLaboratories');
 Route::get('laboratorio/nextid','LaboratoryController@idLaboratory');
 Route::delete('remove/{code}','LaboratoryController@removeProduct');
+
+Route::get('envios/pendientes','SendController@waiting');

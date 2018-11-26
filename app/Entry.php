@@ -59,4 +59,9 @@ class Entry extends Model
     {
         return $this->belongsTo('App\Laboratory', 'LABORATORY_ID', 'ID');
     }
+
+    public function entry()
+    {
+        return $this->hasMany('App\Send', 'INGRESO_ID', 'ID');
+    }
 }
