@@ -39,7 +39,7 @@ function resetPaymentModal() {
 }
 
 function showOrder(idOrder) {
-    var route = "orden/"+idOrder+"/productos";
+    var route = "orden/"+idOrder+"/informacion";
     $.ajax({
         url: route,
         type: 'get',

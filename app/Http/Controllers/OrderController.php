@@ -41,6 +41,38 @@ class OrderController extends Controller
         $arrayPatient = compact('patient');
         $arrayBox = compact('box');
         $response = array_merge($arrayOrder, $arrayPayment, $arrayProducts, $arrayStudent, $arrayPatient, $arrayBox);
+
+        $entry = $order->entry;
+        if (!$entry){
+            return response()->json($response);
+        } else{
+            return response()->json(['exists'=>true]);
+        }
+    }
+
+    public function orderFinal($idOrden)
+    {
+        $result = $order = Order::find($idOrden);
+        //$count = count(compact('order'));
+
+        if ($result == null){
+            return response()->json(['show'=>'false']);
+        }
+
+        $consult = $order->consult;
+        $payment = $order->payments;
+        $product = $order->products;
+        $student = $consult->student;
+        $patient = $consult->patient;
+        $box = $patient->box;
+
+        $arrayOrder = compact('order');
+        $arrayPayment = compact('payment');
+        $arrayProducts = compact('product');
+        $arrayStudent = compact('student');
+        $arrayPatient = compact('patient');
+        $arrayBox = compact('box');
+        $response = array_merge($arrayOrder, $arrayPayment, $arrayProducts, $arrayStudent, $arrayPatient, $arrayBox);
         return response()->json($response);
     }
 

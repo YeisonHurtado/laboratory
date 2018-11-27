@@ -209,12 +209,8 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="form-group">
-                            <label for="total_pagar">Total</label>
-                            <div class="input-group input-group-mini">
-                                <input type="number" name="total_pagar" id="total_pagar" class="form-control form-control-sm" placeholder="Total" readonly="readonly">
-                                <i class="fa fa-dollar-sign"></i>
-                            </div>
+                        <div class="error-mpago alert alert-danger border-danger text-danger d-none">
+                            Escoge el metodo de pago
                         </div>
                     </div>
                 </div>

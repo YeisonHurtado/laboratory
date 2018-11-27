@@ -40,5 +40,6 @@
     <script type="text/javascript" src="{{asset('js/scriptEntry.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/scriptProducts.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/scriptLaboratory.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/scriptSend.js')}}"></script>
     </body>
     </html>

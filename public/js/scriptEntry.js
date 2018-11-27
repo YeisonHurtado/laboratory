@@ -61,6 +61,11 @@ function showOrderEntry(idOrder) {
                 return false;
             }
 
+            if (data.exists == true){
+                alert("Este número de orden ya fue recepcionado, actulizar");
+                return false;
+            }
+
             exist_orden = true;
             $('#codigo_est').val(data.student.EST_COD);
             $('#nombre_est').val(data.student.NOMBRE_EST);

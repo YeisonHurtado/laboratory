@@ -36,6 +36,7 @@ Route::post('orden','OrderController@store');
 Route::post('orden/segunda','OrderController@storeSecondPayment');
 Route::get('orden/producto','OrderController@products');
 Route::get('orden/{idOrden}/productos/','OrderController@productsOrder');
+Route::get('orden/{idOrden}/informacion/','OrderController@orderFinal');
 
 Route::get('pagos/','OrderPaymentsViewController@viewIndex');
 Route::post('addingreso', 'EntryController@store');
@@ -49,4 +50,5 @@ Route::get('lista/laboratorios/{nombrelab?}','LaboratoryController@listLaborator
 Route::get('laboratorio/nextid','LaboratoryController@idLaboratory');
 Route::delete('remove/{code}','LaboratoryController@removeProduct');
 
-Route::get('envios/pendientes','SendController@waiting');
+Route::post('recepcion/guardar','SendController@store');
+Route::get('recepcion/pendientes','SendController@waiting');

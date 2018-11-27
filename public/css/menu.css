@@ -105,7 +105,7 @@ color: #16066B80;
 z-index: 100;
 }
 
-div#products_table, div#lab_table {
+div#products_table, div#lab_table, div#reception {
     height: 300px;
     overflow-y: auto;
 }
@@ -124,6 +124,10 @@ width: 250px;
 
 table.scroll-x th,  table.scroll-x td{
     width: 150px;
+}
+
+table#reception_table{
+    width: 200%;
 }
 
 div.error-add { color: #FF9900; display: none; }

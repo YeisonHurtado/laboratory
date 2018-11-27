@@ -463,6 +463,10 @@ $(document).ready(function (event) {
                     if (data.products == "false"){
                         console.log('Escoge productos');
                     }
+                    
+                    if (data.errors.mto_pago){
+                        $('div.error-mpago').removeClass('d-none').fadeIn(100).delay(2000).fadeOut(200);
+                    }
                 },
             });
         } else if (segundoPago) {
@@ -484,6 +488,10 @@ $(document).ready(function (event) {
                         $('#order_message').addClass('alert alert-danger border-danger text-danger');
                         $('#order_message').text("No se pudo guardar.");
                         $('#order_message').fadeIn(2000).delay(8000).fadeOut(2000);
+                    }
+
+                    if (data.errors.mto_pago){
+                        $('div.error-mpago').removeClass('d-none').fadeIn(100).delay(2000).fadeOut(200);
                     }
                 }
             });
@@ -539,6 +547,7 @@ $(document).ready(function (event) {
 
     function clearOrderForm(){
         $('#order_form')[0].reset();
+        segundoPago = false;
         disabledAllInputs();
         disabledButtons();
         orderProductList('orden/producto');
