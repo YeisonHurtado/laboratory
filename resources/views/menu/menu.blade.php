@@ -10,12 +10,13 @@
       <img src="{{asset('images/trabajo.svg')}}" alt="">
       <span>AUTORIZACIÓN INGRESO TRABAJO LABORATORIO</span>
     </div>
-    <div class="menu">
-      <img src="{{asset('images/tiempo.png')}}" alt="">
-      <span>RECEPCIÓN DE TRABAJOS ENVIADOS POR EXT</span>
-    </div>
     <div class="menu" data-toggle="modal" data-target="#sendModal">
+        <img src="{{asset('images/envio.png')}}" alt="">
         <span>Orden de despacho</span>
+    </div>
+    <div class="menu">
+        <img src="{{asset('images/tiempo.png')}}" alt="">
+        <span>RECEPCIÓN DE TRABAJOS ENVIADOS POR EXT</span>
     </div>
 </div>
 <div class="row-menu">

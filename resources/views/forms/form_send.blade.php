@@ -20,13 +20,20 @@
                             <th>Nombre paciente</th>
                             <th>Laboratorio</th>
                             <th>Preescripción</th>
-                            <th>Enviar</th>
+                            <th>Despachar</th>
+                            <th>No despachar</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         </tbody>
                     </table>
+                </div>
+                <div class="success-envio alert alert-success border-success text-success my-3 d-none">
+                    ¡Trabajo listo para despachar!
+                </div>
+                <div class="error-envio alert alert-danger border-danger text-danger my-3 d-none">
+
                 </div>
             </div>
         </div>

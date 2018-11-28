@@ -28,8 +28,15 @@ function saveSend(receptionId) {
         success: function (data) {
             if (data.save == true){
                 showPending();
+                $('div.success-envio').removeClass('d-none').fadeIn(200).delay(4000).fadeOut(200);
             } else if (data.save == false){
                 alert('Ocurrió un error');
+            }
+        },
+        error: function (request, status, error) {
+            if (request && request.status == 500) {
+                $('div.error-envio').text('Hubo un error en el servidor. No se pudo enviar.')
+                $('div.error-envio').removeClass('d-none').fadeIn(200).delay(4000).fadeOut(200);
             }
         }
     });
