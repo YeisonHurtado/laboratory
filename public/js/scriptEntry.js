@@ -5,7 +5,8 @@ if ($('#cant_art').val() == "NA"){
     $('#cod_art_1, #cod_art_2, #ob_art_1, #ob_art_2').parent('div').css({
         'display':'none'
     });
-} else if ($('#cant_art').val() == "1") {
+}
+else if ($('#cant_art').val() == "1") {
     $('#cod_art_1, #ob_art_1').parent('div').attr({
         'disabled': false
     });
@@ -23,8 +24,10 @@ $(document).ready(function (e) {
     $('#no_orden').on('keyup', function (e) {
         var keycode = (e.keyCode ? e.keyCode : e.which);
         var code = $(this).val();
-        if (keycode == 13)
-            showOrderEntry(code);
+        if (keycode == 13){
+            if (code != '')
+                showOrderEntry(code);
+        }
     });
     
     $('#cant_art').on('change', function (e) {
@@ -61,10 +64,10 @@ function showOrderEntry(idOrder) {
                 return false;
             }
 
-            if (data.exists == true){
+            /*if (data.exists == true){
                 alert("Este número de orden ya fue recepcionado, actulizar");
                 return false;
-            }
+            }*/
 
             exist_orden = true;
             $('#codigo_est').val(data.student.EST_COD);
@@ -81,8 +84,8 @@ function showOrderEntry(idOrder) {
             }
 
             data.order.METODO_PAGO == 1 ? $('#tipo_pago').val('Crédito - Primer pago'): $('#tipo_pago').val('Contado - único pago');
-            $('input#total_cancelado').val(data.payment[0].CONSIGNADO);
-            $('#id_payment').val(data.payment[0].ID)
+            $('input#total_cancelado').val(data.payment.CONSIGNADO);
+            $('#id_payment').val(data.payment.ID);
             $('table#order_entry thead tr').empty();
             $('table#order_entry thead tr').append(
                 '<th>Código</th>' +

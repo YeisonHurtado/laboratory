@@ -190,6 +190,23 @@
                             </tbody>
                         </table>
                     </div>
+                    <!--<div class="col-md-12 d-flex flex-row">
+                        <div class="form-group col-md-6 my-3">
+                            <label for="factura_no" class="col-form-label-sm mb-0">Factura</label>
+                            <div class="input-group input-group-mini">
+                                <input type="number" name="factura_no" id="factura_no" class="form-control form-control-sm" readonly>
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 my-3">
+                            <label for="reciboCaja_no" class="col-form-label-sm mb-0">Recibo de caja</label>
+                            <div class="input-group input-group-mini">
+                                <input type="number" name="reciboCaja_no" id="reciboCaja_no" class="form-control form-control-sm">
+                                <i class="fas fa-receipt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    -->
                 </div>
             </div>
             <div class="card card-default my-1">
@@ -209,6 +226,13 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label for="total_pagar">Total</label>
+                            <div class="input-group input-group-mini">
+                                <input type="number" name="total_pagar" id="total_pagar" class="form-control form-control-sm" placeholder="Total" readonly="readonly">
+                                <i class="fa fa-dollar-sign"></i>
+                            </div>
+                        </div>
                         <div class="error-mpago alert alert-danger border-danger text-danger d-none">
                             Escoge el metodo de pago
                         </div>
@@ -224,7 +248,6 @@
       <div class="form-group">
         <button type="button" name="new_reciept" id="new_reciept" class="btn btn-success btn-sm my-1"><i class="fas fa-user-plus"></i> Nuevo</button>
         <button type="button" name="save_receipt" id="save_receipt" class="btn btn-primary btn-sm my-1"><i class="fa fa-database"></i> Guardar</button>
-        <button type="button" name="print_reciept" id="print_reciept" class="btn btn-primary btn-sm my-1"><i class="fas fa-print"></i> Imprimir</button>
         <button type="button" name="update_receipt" id="update_receipt" class="btn btn-success btn-sm my-1"><i class="fa fa-redo-alt"></i> Modificar</button>
         <button type="button" name="exit_reciept" id="exit_reciept" class="btn btn-danger btn-sm my-1" data-dismiss="modal" onclick="clearOrderForm()"><i class="fas fa-times"></i> Cerrar</button>
       </div>

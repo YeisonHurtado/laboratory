@@ -38,6 +38,10 @@ Route::get('orden/producto','OrderController@products');
 Route::get('orden/{idOrden}/productos/','OrderController@productsOrder');
 Route::get('orden/{idOrden}/informacion/','OrderController@orderFinal');
 
+Route::get('consulta/{idConsulta}','ConsultController@allOrders');
+Route::get('orden/{idOrden}','ConsultController@onlyOneOrder');
+Route::get('consulta/{idConsulta}/orden/{idOrden}','ConsultController@printOrder');
+
 Route::get('pagos/','OrderPaymentsViewController@viewIndex');
 Route::post('addingreso', 'EntryController@store');
 

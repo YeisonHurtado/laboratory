@@ -6,6 +6,8 @@ use App\Consult;
 use App\Order;
 use App\Product;
 use App\Payment;
+use App\Receipt;
+use App\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,7 +30,7 @@ class OrderController extends Controller
         }
 
         $consult = $order->consult;
-        $payment = $order->payments;
+        $payment = $order->payments->first();
         $product = $order->products;
         $student = $consult->student;
         $patient = $consult->patient;
@@ -43,11 +45,10 @@ class OrderController extends Controller
         $response = array_merge($arrayOrder, $arrayPayment, $arrayProducts, $arrayStudent, $arrayPatient, $arrayBox);
 
         $entry = $order->entry;
-        if (!$entry){
-            return response()->json($response);
-        } else{
-            return response()->json(['exists'=>true]);
-        }
+
+        return response()->json($response);
+        /*if (!$entry){
+        }*/
     }
 
     public function orderFinal($idOrden)
@@ -60,19 +61,23 @@ class OrderController extends Controller
         }
 
         $consult = $order->consult;
-        $payment = $order->payments;
         $product = $order->products;
         $student = $consult->student;
         $patient = $consult->patient;
         $box = $patient->box;
+        $payment = $order->payments()->first();
+        $receipt = $payment->receipt;
+        $invoice = $receipt->invoice;
 
         $arrayOrder = compact('order');
         $arrayPayment = compact('payment');
+        $arrayInvoice = compact('invoice');
         $arrayProducts = compact('product');
         $arrayStudent = compact('student');
         $arrayPatient = compact('patient');
         $arrayBox = compact('box');
-        $response = array_merge($arrayOrder, $arrayPayment, $arrayProducts, $arrayStudent, $arrayPatient, $arrayBox);
+        $response = array_merge($arrayOrder, $arrayPayment, $arrayInvoice, $arrayProducts, $arrayStudent, $arrayPatient, $arrayBox);
+
         return response()->json($response);
     }
 
@@ -129,11 +134,9 @@ class OrderController extends Controller
             foreach ($request->get('quantity') as $index => $value){
                 $quantity[$index] = $value;
             }
-
             foreach ($request->get('total_item') as $index => $value){
                 $total[$index] = $value;
             }
-
             foreach ($request->get('total') as $index => $value){
                 $totalPercent[$index] = $value;
             }
@@ -148,7 +151,7 @@ class OrderController extends Controller
                 if ($request->get('mto_pago') == 2){
                     $order->CANCELADO = 1;
                 }
-                $result = $idConsult->order()->save($order);
+                $result = $idConsult->orders()->save($order);
                 $orders = Order::all();
                 $idOrder = $orders->last();
                 $payment = new Payment(['CONSIGNADO'=>$totalPercent[$i]]);
@@ -157,7 +160,7 @@ class OrderController extends Controller
             }
 
             if ($result){
-                return response()->json(['save'=>'true']);
+                return response()->json(['save'=>'true', 'ID'=>$idConsult->ID]);
             } else {
                 return response()->json(['save'=>'false']);
             }
@@ -184,10 +187,11 @@ class OrderController extends Controller
             $order->CANCELADO = 1;
             $payment = new Payment(['CONSIGNADO'=>$request->get('total_pagar'), 'PENDIENTE'=>0]);
             $order->save();
+            $consult = $order->consult;
             $result = $order->payments()->save($payment);
 
             if ($result){
-                return response()->json(['save'=>'true']);
+                return response()->json(['save'=>'true', 'ID'=>$order->IDORDEN]);
             } else {
                 return response()->json(['save'=>'false']);
             }

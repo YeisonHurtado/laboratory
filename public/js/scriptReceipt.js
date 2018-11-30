@@ -32,8 +32,9 @@ $(document).ready(function (event) {
     $('#new_reciept').on('click', function (e) {
         e.preventDefault();
         enabledAllInputs();
+        $('#btnAdd').attr('disabled', false);
         $('#new_reciept').attr('disabled', true);
-        $('#save_receipt, #print_reciept').attr('disabled', false);
+        $('#save_receipt').attr('disabled', false);
         $('#code_student').focus();
     });
 
@@ -185,6 +186,8 @@ $(document).ready(function (event) {
         $('#change_student').attr('disabled', false);
         $('#change_student').attr('data-numHC',$(':first-child',this).text());
     });
+
+
 });
 
 // ---------------------------------------------------------------- //
@@ -452,6 +455,7 @@ $(document).ready(function (event) {
                         $('#order_message').addClass('alert alert-success border-success text-success');
                         $('#order_message').text("Orden de pago guardada.");
                         $('#order_message').fadeIn(2000).delay(8000).fadeOut(2000);
+                        readyToPrint(data.ID, '');
                         clearOrderForm();
                     } else if (data.save == "false"){
                         $('#order_message').removeClass('d-none alert alert-success border-success text-success');
@@ -463,13 +467,16 @@ $(document).ready(function (event) {
                     if (data.products == "false"){
                         console.log('Escoge productos');
                     }
-                    
-                    if (data.errors.mto_pago){
-                        $('div.error-mpago').removeClass('d-none').fadeIn(100).delay(2000).fadeOut(200);
+
+                    if (data.errors){
+                        if (data.errors.mto_pago){
+                            $('div.error-mpago').removeClass('d-none').fadeIn(100).delay(2000).fadeOut(200);
+                        }
                     }
                 },
             });
-        } else if (segundoPago) {
+        }
+        else if (segundoPago) {
             $.ajax({
                 url: route+'/segunda',
                 headers: {'X-CSRF-TOKEN':token},
@@ -482,6 +489,7 @@ $(document).ready(function (event) {
                         $('#order_message').addClass('alert alert-success border-success text-success');
                         $('#order_message').text("Segunda orden de pago guardada. Queda pendiente para pagar en caja.");
                         $('#order_message').fadeIn(2000).delay(8000).fadeOut(2000);
+                        readyToPrint('', data.ID)
                         clearOrderForm();
                     } else if (data.save == "false"){
                         $('#order_message').removeClass('d-none alert alert-success border-success text-success');
@@ -490,14 +498,80 @@ $(document).ready(function (event) {
                         $('#order_message').fadeIn(2000).delay(8000).fadeOut(2000);
                     }
 
-                    if (data.errors.mto_pago){
-                        $('div.error-mpago').removeClass('d-none').fadeIn(100).delay(2000).fadeOut(200);
+                    if (data.errors){
+                        if (data.errors.mto_pago){
+                            $('div.error-mpago').removeClass('d-none').fadeIn(100).delay(2000).fadeOut(200);
+                        }
                     }
                 }
             });
         }
     }
+    
+    function readyToPrint(idConsult, idOrder) {
+        if (idConsult != ""){
+            $.ajax({
+                url: 'consulta/'+idConsult,
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    $('#printCodStu').val(data.student.EST_COD);
+                    $('#printNameStudent').val(data.student.NOMBRE_EST);
+                    $('#printCodPat').val(data.patient.NUM_PACIENTE);
+                    $('#printNamePat').val(data.patient.NOMBRE);
+                    $('#printReceiptModal').modal('show');
+                    $.each(data.product, function (i, item) {
+                        $.each(item, function (k, l) {
+                            $('table#printReceiptTable tbody').append(
+                                '<tr>' +
+                                '<td><input type="text" name="printCodeProduct[]" class="printCodeProduct form-control form-control-sm" readonly value="'+l.PRODUCT_CODE+'"></td>' +
+                                '<td><input type="hidden" name="printNameProd[]" value="'+ l.PRODUCT_NAME +'">'+l.PRODUCT_NAME+'</td>'+
+                                '<td><i class="fa fa-dollar-sign"></i> '+l.PRODUCT_VAL+'</td>'+
+                                '<td><input type="number" name="printQuantity[]" class="printQuantity form-control form-control-sm" readonly value="'+l.pivot.CANTIDAD+'"></td>' +
+                                '<td>'+
+                                //'<button type="button" name="print_reciept" data-print_order="'+l.pivot.ID_ORDEN+'" data-id_consult="'+data.consult.ID+'" class="print_reciept btn btn-success btn-sm my-1"><i class="fas fa-print"></i> Imprimir</button>' +
+                                '<a href="consulta/'+ data.consult.ID +'/orden/'+ l.pivot.ID_ORDEN+'" class="print_reciept btn btn-success btn-sm my-1"><i class="fas fa-print"></i> Imprimir</a>' +
+                                '</td>'+
+                                '</tr>'
+                            );
+                        });
 
+                    });
+                }
+            });
+            return false;
+        }
+        else if (idOrder != ""){
+            $.ajax({
+                url: 'orden/'+idOrder,
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    $('#printCodStu').val(data.student.EST_COD);
+                    $('#printNameStudent').val(data.student.NOMBRE_EST);
+                    $('#printCodPat').val(data.patient.NUM_PACIENTE);
+                    $('#printNamePat').val(data.patient.NOMBRE);
+                    $('#printReceiptModal').modal('show');
+                    $.each(data.product, function (i, item) {
+                        $('table#printReceiptTable tbody').append(
+                            '<tr>' +
+                            '<td><input type="text" name="printCodeProduct[]" class="printCodeProduct form-control form-control-sm" readonly value="'+item.PRODUCT_CODE+'"></td>' +
+                            '<td><input type="hidden" name="printNameProd[]" value="'+ item.PRODUCT_NAME +'">'+item.PRODUCT_NAME+'</td>'+
+                            '<td><i class="fa fa-dollar-sign"></i> '+item.PRODUCT_VAL+'</td>'+
+                            '<td><input type="number" name="printQuantity[]" class="printQuantity form-control form-control-sm" readonly value="'+item.pivot.CANTIDAD+'"></td>' +
+                            '<td>'+
+                            //'<button type="button" name="print_reciept" data-print_order="'+l.pivot.ID_ORDEN+'" data-id_consult="'+data.consult.ID+'" class="print_reciept btn btn-success btn-sm my-1"><i class="fas fa-print"></i> Imprimir</button>' +
+                            '<a href="consulta/'+ data.consult.ID +'/orden/'+ item.pivot.ID_ORDEN+'" class="print_reciept btn btn-success btn-sm my-1"><i class="fas fa-print"></i> Imprimir</a>' +
+                            '</td>'+
+                            '</tr>'
+                        );
+                    });
+                }
+            });
+            return false;
+        }
+    }
+    
     function totalOrder(percent) {
         var subTotal = 0;
         var total = Array();
@@ -538,7 +612,7 @@ $(document).ready(function (event) {
 
     function disabledButtons() {
         $('#new_reciept').attr('disabled', false);
-        $('#save_receipt, #print_reciept, #update_receipt, #update_receipt').attr({'disabled':true});
+        $('#save_receipt, #update_receipt, #update_receipt').attr({'disabled':true});
     }
 
     function enabledAllInputs() {

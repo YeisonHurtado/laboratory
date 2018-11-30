@@ -12,7 +12,7 @@
     </div>
     <div class="menu" data-toggle="modal" data-target="#sendModal">
         <img src="{{asset('images/envio.png')}}" alt="">
-        <span>Orden de despacho</span>
+        <span>ORDEN DE DESPACHO</span>
     </div>
     <div class="menu">
         <img src="{{asset('images/tiempo.png')}}" alt="">
@@ -41,6 +41,7 @@
 @include("modal.laboratories")
 @include("modal.listlaboratories")
 @include("modal.employees")
+@include("printModal.printReceipt")
 @include("deletemodals.productDelete")
 @include("deletemodals.laboratoryDelete")
 @include("patient.patients_student")

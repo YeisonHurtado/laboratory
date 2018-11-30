@@ -130,6 +130,10 @@ table#reception_table{
     width: 200%;
 }
 
+table#printReceiptTable{
+    width: 100%;
+}
+
 div.error-add { color: #FF9900; display: none; }
 
 .message_product { padding: 15px; margin: 10px; display: none; }

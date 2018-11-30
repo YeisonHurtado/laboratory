@@ -24,8 +24,8 @@ class Consult extends Model
         return $this->belongsTo('App\Patient', 'HCLINICA', 'NUM_PACIENTE');
     }
 
-    public function order()
+    public function orders()
     {
-        return $this->hasOne('App\Order', 'CONSULTA_ID', 'ID');
+        return $this->hasMany('App\Order', 'CONSULTA_ID', 'ID');
     }
 }

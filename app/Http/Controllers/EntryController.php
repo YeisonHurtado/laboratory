@@ -163,7 +163,6 @@ class EntryController extends Controller
 
             if ($result){
                 return response()->json(['save'=>'true']);
-                return response()->json($nDiente);
             } else {
                 return response()->json(['save'=>'false']);
             }

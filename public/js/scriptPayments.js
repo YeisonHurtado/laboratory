@@ -14,6 +14,8 @@ $(document).ready(function (e) {
         var idFactura = $(this).attr('data-id_factura');
         $('#id_order').val(idOrden);
         $('#id_factura').val(idFactura);
+        $('#order_form')[0].reset();
+        $('table#product_adds tbody').empty();
         showOrder(idOrden);
         $('input#mto_pago2').prop('checked', true);
         $('input#mto_pago1, input#mto_pagoU').attr('disabled', true);

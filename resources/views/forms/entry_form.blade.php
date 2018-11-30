@@ -276,6 +276,7 @@
         </div>
         <div class="form-group">
             <button type="button" name="save_entry" id="save_entry" class="btn btn-primary btn-sm"><i class="fa fa-database"></i> Guardar</button>
+            <button type="button" name="search_payment" id="search_payment" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Segundo pago</button>
             <button type="button" name="exit_entry" id="exit_entry" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Salir</button>
         </div>
     </div>
