@@ -105,7 +105,7 @@ color: #16066B80;
 z-index: 100;
 }
 
-div#products_table, div#lab_table, div#reception {
+div#products_table, div#lab_table, div#reception, div#entry_list {
     height: 300px;
     overflow-y: auto;
 }
@@ -122,11 +122,16 @@ table.scroll-x>thead th:nth-child(2), table.scroll-x>tbody tr td:nth-child(2) {
 width: 250px;
 }
 
+table#entryListTable>thead tr th:nth-child(3), table#entryListTable>thead tr th:nth-child(4), table#entryListTable>thead tr th:nth-child(5),
+table#entryListTable>tbody tr td:nth-child(3), table#entryListTable>tbody tr td:nth-child(4), table#entryListTable>tbody tr td:nth-child(5){
+    width: 250px;
+}
+
 table.scroll-x th,  table.scroll-x td{
     width: 150px;
 }
 
-table#reception_table{
+table#reception_table, table#entryListTable{
     width: 200%;
 }
 

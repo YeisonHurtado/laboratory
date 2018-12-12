@@ -46,9 +46,27 @@ class OrderController extends Controller
 
         $entry = $order->entry;
 
-        return response()->json($response);
-        /*if (!$entry){
-        }*/
+        if (!$entry){
+            return response()->json($response);
+        } else {
+            $exists = array(true);
+            $exists = compact('exists');
+            $receipt = $payment->receipt;
+            $invoice = new Invoice();
+            if (!$receipt || $receipt == null){
+                $invoice = $payment->invoicePos;
+            } else {
+                $invoice = $receipt->invoice;
+            }
+            $payment = $order->payments->last();
+
+            $arrayPayment = compact('payment');
+            $receipt = compact('receipt');
+            $invoice = compact('invoice');
+            $entry = compact('entry');
+            $response = array_merge($arrayOrder, $arrayPayment, $arrayProducts, $arrayStudent, $arrayPatient, $receipt, $invoice, $entry, $arrayBox, $exists);
+            return response()->json($response);
+        }
     }
 
     public function orderFinal($idOrden)

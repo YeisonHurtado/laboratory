@@ -35,6 +35,7 @@
 </div>
 @include("modal.receipt")
 @include("modal.entry_work")
+@include("modal.entry_list")
 @include("modal.send")
 @include("modal.products")
 @include("modal.listproducts")

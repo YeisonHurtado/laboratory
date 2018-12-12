@@ -11,48 +11,50 @@
 |
 */
 
+Route::resource('estudiante','StudentController');
+Route::resource('paciente','PatientController');
+Route::resource('/productos','ProductController');
+Route::resource('laboratorios','LaboratoryController');
+
 Route::get('/', function () {
     return view('login.login');
 });
 
-Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::get('menu', 'MenuController@index')->name('menu');
-
-Route::resource('estudiante','StudentController');
 Route::get('estudiante/{codigo}','StudentController@show');
 Route::get('estudiante/{codigo}/pacientes/', 'StudentController@patients');
-
-Route::resource('paciente','PatientController');
 Route::get('paciente/{num}/show','PatientController@show');
 Route::get('paciente/{num}/all','PatientController@index');
-
-
-Route::resource('/productos','ProductController');
-Route::post('addproductos', 'ProductController@store');
 Route::get('lista/productos/{code?}','ProductController@listproducts');
 Route::get('name/productos/{nameproduct?}','ProductController@searchNameProduct');
-
-Route::post('orden','OrderController@store');
-Route::post('orden/segunda','OrderController@storeSecondPayment');
 Route::get('orden/producto','OrderController@products');
 Route::get('orden/{idOrden}/productos/','OrderController@productsOrder');
 Route::get('orden/{idOrden}/informacion/','OrderController@orderFinal');
-
 Route::get('consulta/{idConsulta}','ConsultController@allOrders');
 Route::get('orden/{idOrden}','ConsultController@onlyOneOrder');
 Route::get('consulta/{idConsulta}/orden/{idOrden}','ConsultController@printOrder');
-
 Route::get('pagos/','OrderPaymentsViewController@viewIndex');
-Route::post('addingreso', 'EntryController@store');
-
+Route::get('lista/ingresos','EntryController@entryList');
 Route::get('cajas', 'BoxController@boxList');
-
-Route::resource('/laboratorios','LaboratoryController');
-Route::post('addlaboratorio','LaboratoryController@store');
 Route::get('proveedores', 'LaboratoryController@providers');
 Route::get('lista/laboratorios/{nombrelab?}','LaboratoryController@listLaboratories');
 Route::get('laboratorio/nextid','LaboratoryController@idLaboratory');
+Route::get('recepcion/pendientes','SendController@waiting');
+
+Route::get('dias', 'SendController@contarDias');
+
+Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::post('addproductos', 'ProductController@store');
+Route::post('orden','OrderController@store');
+Route::post('orden/segunda','OrderController@storeSecondPayment');
+Route::post('addingreso', 'EntryController@store');
+Route::post('addlaboratorio','LaboratoryController@store');
+Route::post('recepcion/guardar','SendController@store');
+
+
+Route::patch('ingreso/{idEntry}','EntryController@update');
+
 Route::delete('remove/{code}','LaboratoryController@removeProduct');
 
-Route::post('recepcion/guardar','SendController@store');
-Route::get('recepcion/pendientes','SendController@waiting');
+
+

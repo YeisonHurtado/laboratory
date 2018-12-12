@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entry;
 use App\Send;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SendController extends Controller
@@ -50,5 +51,22 @@ class SendController extends Controller
             return response()->json(['save'=>false]);
         }
 
+    }
+
+    public function contarDias()
+    {
+
+        $to = new \DateTime('2018-12-10');
+        $to = $to->format('Y-m-d');
+
+        $now = Carbon::now();
+        $now = $now->format('Y-m-d');
+
+
+        $fechaEmision = Carbon::parse($now);
+        $fechaExpiracion = Carbon::parse($to);
+
+        $diasDiferencia = $fechaExpiracion->diffInDays($fechaEmision);
+        return $diasDiferencia;
     }
 }
